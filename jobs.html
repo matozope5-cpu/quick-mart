@@ -4,14 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Quickmart – Job Listings</title>
-    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&display=swap" rel="stylesheet"/>
-    <!-- Font Awesome 6 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"/>
-    <!-- SweetAlert2 -->
-    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.3/dist/sweetalert2.min.css" rel="stylesheet">
     <style>
-        /* ===== RESET & BASE ===== */
+        /* (same as before – no changes) */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         :root {
             --primary: #0f7c3f; --primary-dark: #0a5e2f; --primary-light: #e6f5ed;
@@ -80,65 +76,6 @@
         .btn-apply:hover { background: var(--primary-dark); transform: scale(1.02); }
         .btn-apply:disabled { background: var(--gray-300); cursor: not-allowed; transform: none; }
 
-        /* ===== MODAL ===== */
-        .modal-overlay {
-            position: fixed; inset: 0; z-index: 9999;
-            background: rgba(15,23,42,0.6); backdrop-filter: blur(8px);
-            display: none; align-items: center; justify-content: center;
-            padding: 1.5rem; animation: fadeIn 0.25s ease;
-        }
-        .modal-overlay.open { display: flex; }
-        .modal-box {
-            background: #fff; max-width: 460px; width: 100%;
-            border-radius: var(--radius-lg); padding: 2.2rem 2rem 2rem;
-            box-shadow: var(--shadow-xl); animation: slideUp 0.35s ease;
-            position: relative;
-        }
-        .modal-box .modal-close {
-            position: absolute; top: 1rem; right: 1.2rem;
-            background: none; font-size: 1.4rem; color: var(--gray-400);
-            transition: var(--transition);
-        }
-        .modal-box .modal-close:hover { color: var(--gray-700); transform: rotate(90deg); }
-        .modal-box .modal-icon { text-align: center; font-size: 3rem; color: var(--primary); margin-bottom: 0.5rem; }
-        .modal-box h3 { font-size: 1.3rem; font-weight: 800; text-align: center; color: var(--gray-900); }
-        .modal-box .modal-sub { text-align: center; color: var(--gray-500); font-size: 0.9rem; margin: 0.2rem 0 1.5rem; }
-        .modal-box .modal-job { background: var(--gray-50); padding: 0.6rem 1rem; border-radius: var(--radius); text-align: center; font-weight: 600; font-size: 0.9rem; color: var(--gray-700); margin-bottom: 1.2rem; border: 1px solid var(--gray-200); }
-        .modal-box .form-group { display: flex; flex-direction: column; gap: 4px; margin-bottom: 1rem; }
-        .modal-box .form-group label { font-size: 0.75rem; font-weight: 700; color: var(--gray-700); }
-        .modal-box .form-group input { padding: 0.7rem 1rem; border: 1.5px solid var(--gray-200); border-radius: var(--radius); font-size: 0.95rem; transition: var(--transition); background: var(--gray-50); width: 100%; }
-        .modal-box .form-group input:focus { border-color: var(--primary); box-shadow: 0 0 0 4px rgba(15,124,63,0.1); background: #fff; }
-        .modal-box .form-group input:disabled { background: var(--gray-100); font-weight: 700; color: var(--primary-dark); }
-
-        /* STK waiting screen */
-        .stk-wait {
-            text-align: center;
-            display: none;
-        }
-        .stk-wait.active { display: block; }
-        .stk-wait .spinner { font-size: 3rem; color: var(--gold); animation: spin 1s linear infinite; }
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-        .stk-wait .stk-timer { font-size: 0.9rem; color: var(--gray-500); margin-top: 0.5rem; }
-        .stk-wait .stk-cancel-btn { margin-top: 1rem; }
-
-        .modal-actions { display: flex; gap: 0.8rem; margin-top: 1.2rem; }
-        .btn-primary {
-            display: inline-flex; align-items: center; gap: 10px;
-            padding: 0.8rem 2rem; background: var(--primary); color: #fff;
-            border-radius: 50px; font-weight: 700; font-size: 0.95rem;
-            transition: var(--transition); box-shadow: 0 4px 16px rgba(15,124,63,0.3);
-            justify-content: center; flex: 1;
-        }
-        .btn-primary:hover { background: var(--primary-dark); transform: translateY(-2px); }
-        .btn-secondary {
-            display: inline-flex; align-items: center; gap: 10px;
-            padding: 0.8rem 1.5rem; background: transparent; color: var(--gray-700);
-            border-radius: 50px; font-weight: 600; font-size: 0.9rem;
-            border: 2px solid var(--gray-300); transition: var(--transition);
-            justify-content: center; flex: 0.5;
-        }
-        .btn-secondary:hover { border-color: var(--primary); color: var(--primary); background: var(--primary-light); }
-
         .toast {
             position: fixed; bottom: 2rem; right: 2rem; z-index: 10000;
             background: var(--gray-900); color: #fff;
@@ -155,7 +92,6 @@
             .jobs-grid { grid-template-columns: 1fr; }
             .navbar { padding: 0 1rem; }
             #page-jobs { padding: 90px 1rem 3rem; }
-            .modal-box { padding: 1.8rem 1.2rem; }
             .nav-links a { padding: 0.4rem 0.8rem; font-size: 0.8rem; }
         }
         @media (max-width: 480px) {
@@ -183,7 +119,7 @@
     <section id="page-jobs">
         <div class="jobs-header">
             <h2><i class="fas fa-briefcase" style="color:var(--primary);margin-right:10px;"></i>Available Positions</h2>
-            <p>Browse through our open roles. Click <strong>Apply</strong> to start your application with a secure M-Pesa payment.</p>
+            <p>Browse through our open roles. Click <strong>Apply</strong> to proceed to the payment page.</p>
         </div>
 
         <div class="jobs-filters">
@@ -195,101 +131,16 @@
         <div class="jobs-grid" id="jobsGrid"></div>
     </section>
 
-    <!-- ===== STK PUSH MODAL ===== -->
-    <div class="modal-overlay" id="stkModal">
-        <div class="modal-box">
-            <button class="modal-close" id="modalClose"><i class="fas fa-times"></i></button>
-            <div class="modal-icon"><i class="fas fa-mobile-alt"></i></div>
-            <h3>M-Pesa STK Push</h3>
-            <p class="modal-sub">Complete your application with a secure payment</p>
-            <div class="modal-job" id="modalJobName">Position Name</div>
-
-            <!-- Step 1: Phone & Fee -->
-            <div id="stkStep1">
-                <div class="form-group">
-                    <label>M-Pesa Phone Number <span class="required" style="color:var(--accent);">*</span></label>
-                    <input type="tel" id="stkPhone" placeholder="0712 345 678" />
-                </div>
-                <div class="form-group">
-                    <label>Application Fee</label>
-                    <input type="text" id="stkFee" disabled />
-                </div>
-                <div class="modal-actions">
-                    <button class="btn-secondary" id="stkCancel">Cancel</button>
-                    <button class="btn-primary" id="stkInitiate"><i class="fas fa-paper-plane"></i> Pay &amp; Apply</button>
-                </div>
-            </div>
-
-            <!-- Step 2: Waiting for STK verification -->
-            <div class="stk-wait" id="stkWait">
-                <div class="spinner"><i class="fas fa-spinner fa-pulse"></i></div>
-                <p style="font-weight: 600; margin-top: 0.5rem;">STK Push Sent!</p>
-                <p style="font-size: 0.9rem; color: var(--gray-600);">Check your phone and enter your M-Pesa PIN to complete the payment.</p>
-                <p class="stk-timer" id="stkTimer">Verifying payment... 00:00</p>
-                <button class="btn-secondary stk-cancel-btn" id="stkCancelWait" style="margin-top: 1rem;">Cancel</button>
-            </div>
-        </div>
-    </div>
-
     <!-- ===== TOAST ===== -->
     <div class="toast" id="toast">
         <i class="fas fa-check-circle"></i>
         <span id="toastMessage">Success!</span>
     </div>
 
-    <!-- SweetAlert2 JS -->
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.3/dist/sweetalert2.all.min.js"></script>
-
     <script>
         (function() {
             // ================================================================
-            // 1. MEGAPAY CONFIG
-            // ================================================================
-            const MEGAPAY_CONFIG = {
-                apiKey: 'MGPY8YQwhVEK',
-                email: 'bkiplangat217@gmail.com',
-                baseUrl: 'https://megapay.co.ke'
-            };
-
-            // ================================================================
-            // 2. PHONE NORMALIZATION
-            // ================================================================
-            function normalizePhoneForBackend(raw) {
-                if (!raw) return null;
-                let digits = raw.replace(/\D/g, '');
-                if (!digits.length) return null;
-                if (digits.startsWith('254')) {
-                    if (digits.length >= 12) return digits.substring(0, 12);
-                    return digits;
-                }
-                if (digits.startsWith('0')) {
-                    digits = digits.substring(1);
-                }
-                if (digits.length >= 9) {
-                    digits = digits.substring(0, 9);
-                }
-                if (digits.length < 9) return null;
-                const first = digits.charAt(0);
-                if (first !== '7' && first !== '1') return null;
-                return '254' + digits;
-            }
-
-            function normalizePhoneManually(phone) {
-                let normalized = phone.replace(/\D/g, '');
-                if (normalized.startsWith('0') && normalized.length === 10) {
-                    normalized = '254' + normalized.substring(1);
-                } else if (normalized.startsWith('254') && normalized.length === 12) {
-                    // already good
-                } else if (normalized.startsWith('+254')) {
-                    normalized = normalized.substring(1);
-                } else if (normalized.length === 9) {
-                    normalized = '254' + normalized;
-                }
-                return normalized;
-            }
-
-            // ================================================================
-            // 3. JOBS DATA (full list - only one declaration)
+            // JOBS DATA
             // ================================================================
             const JOBS = [
                 { id: 1, title: 'Store Manager', available: true, salary: 'KES 150,000', fee: 2500, tasks: ['Oversee daily store operations and staff management','Ensure customer satisfaction and resolve complaints','Manage inventory, budgets, and financial reporting','Implement company policies and safety standards','Drive sales growth and promotional activities'] },
@@ -317,29 +168,23 @@
             ];
 
             // ================================================================
-            // 4. RENDER FUNCTIONS
+            // RENDER FUNCTIONS
             // ================================================================
-            let currentJob = null;
-            let paymentReference = null;
-            let paymentTimer = null;
-            let stkTimerInterval = null;
-            let isWaiting = false;
-            let currentFilter = 'all';
-
             const jobsGrid = document.getElementById('jobsGrid');
             const filterBtns = document.querySelectorAll('.jobs-filters button');
-            const stkModal = document.getElementById('stkModal');
-            const modalClose = document.getElementById('modalClose');
-            const stkCancel = document.getElementById('stkCancel');
-            const stkInitiate = document.getElementById('stkInitiate');
-            const stkPhone = document.getElementById('stkPhone');
-            const stkFee = document.getElementById('stkFee');
-            const modalJobName = document.getElementById('modalJobName');
-            const stkWait = document.getElementById('stkWait');
-            const stkTimer = document.getElementById('stkTimer');
-            const stkCancelWait = document.getElementById('stkCancelWait');
             const toast = document.getElementById('toast');
             const toastMessage = document.getElementById('toastMessage');
+            let currentFilter = 'all';
+
+            function showToast(message, type = 'success') {
+                toastMessage.textContent = message;
+                toast.className = 'toast';
+                if (type === 'success') toast.classList.add('success');
+                if (type === 'error') toast.classList.add('error');
+                toast.classList.add('show');
+                clearTimeout(toast._timer);
+                toast._timer = setTimeout(() => toast.classList.remove('show'), 4000);
+            }
 
             function getSortedJobs() {
                 const available = JOBS.filter(j => j.available).sort((a,b) => a.fee - b.fee);
@@ -391,7 +236,9 @@
                                 setTimeout(() => { window.location.href = 'details.html'; }, 1000);
                                 return;
                             }
-                            openStkModal(job);
+                            // Store selected job in sessionStorage and redirect to dash
+                            sessionStorage.setItem('selectedJob', JSON.stringify(job));
+                            window.location.href = 'dash.html';
                         }
                     });
                 });
@@ -407,291 +254,10 @@
                 });
             });
 
-            // -------- TOAST --------
-            function showToast(message, type = 'success') {
-                toastMessage.textContent = message;
-                toast.className = 'toast';
-                if (type === 'success') toast.classList.add('success');
-                if (type === 'error') toast.classList.add('error');
-                toast.classList.add('show');
-                clearTimeout(toast._timer);
-                toast._timer = setTimeout(() => toast.classList.remove('show'), 4000);
-            }
-
             // ================================================================
-            // 5. STK MODAL CONTROLS
-            // ================================================================
-            function openStkModal(job) {
-                currentJob = job;
-                modalJobName.textContent = `${job.title} – Application Fee: KES ${job.fee.toLocaleString()}`;
-                stkFee.value = `KES ${job.fee.toLocaleString()}`;
-                stkPhone.value = '';
-                document.getElementById('stkStep1').style.display = 'block';
-                stkWait.classList.remove('active');
-                stkModal.classList.add('open');
-                if (stkTimerInterval) clearInterval(stkTimerInterval);
-                stkTimer.textContent = 'Verifying payment... 00:00';
-                isWaiting = false;
-            }
-
-            function closeStkModal() {
-                stkModal.classList.remove('open');
-                currentJob = null;
-                if (paymentTimer) { clearInterval(paymentTimer); paymentTimer = null; }
-                if (stkTimerInterval) { clearInterval(stkTimerInterval); stkTimerInterval = null; }
-                isWaiting = false;
-            }
-
-            modalClose.addEventListener('click', closeStkModal);
-            stkCancel.addEventListener('click', closeStkModal);
-            stkCancelWait.addEventListener('click', closeStkModal);
-            stkModal.addEventListener('click', (e) => { if (e.target === stkModal) closeStkModal(); });
-
-            // ================================================================
-            // 6. MEGAPAY API FUNCTIONS
-            // ================================================================
-            async function sendPayHeroSTK(phoneNumber, amount) {
-                let msisdn = phoneNumber;
-                if (msisdn.startsWith('254')) msisdn = '0' + msisdn.substring(3);
-                const timestamp = Date.now();
-                const randomStr = Math.random().toString(36).substring(2,8).toUpperCase();
-                const reference = `QM-${timestamp}-${randomStr}`;
-                const payload = {
-                    api_key: MEGAPAY_CONFIG.apiKey,
-                    email: MEGAPAY_CONFIG.email,
-                    amount: parseInt(amount),
-                    msisdn: msisdn,
-                    reference: reference
-                };
-                const response = await fetch(`${MEGAPAY_CONFIG.baseUrl}/backend/v1/initiatestk`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(payload)
-                });
-                const result = await response.json();
-                if (!response.ok) throw new Error(result.message || result.error || 'Payment initiation failed');
-                if (!result.transaction_request_id) throw new Error(result.ResponseDescription || result.massage || 'No transaction ID');
-                return { success: true, reference: result.transaction_request_id, external_reference: reference, raw: result };
-            }
-
-            async function checkPaymentStatus(reference, maxAttempts = 20) {
-                let attempts = 0;
-                return new Promise((resolve, reject) => {
-                    paymentTimer = setInterval(async () => {
-                        attempts++;
-                        try {
-                            const payload = {
-                                api_key: MEGAPAY_CONFIG.apiKey,
-                                email: MEGAPAY_CONFIG.email,
-                                transaction_request_id: reference
-                            };
-                            const response = await fetch(`${MEGAPAY_CONFIG.baseUrl}/backend/v1/transactionstatus`, {
-                                method: 'POST',
-                                headers: { 'Content-Type': 'application/json' },
-                                body: JSON.stringify(payload)
-                            });
-                            const result = await response.json();
-                            let status = result.TransactionStatus || result.status || '';
-                            if (!status && result.ResponseCode !== undefined) {
-                                status = Number(result.ResponseCode) === 0 ? 'COMPLETED' : 'FAILED';
-                            }
-                            if (!status && result.TransactionCode !== undefined) {
-                                status = String(result.TransactionCode) === '0' ? 'COMPLETED' : 'PENDING';
-                            }
-                            const statusUpper = String(status).toUpperCase();
-                            if (statusUpper === 'COMPLETED' || statusUpper === 'SUCCESS' || statusUpper === 'PAID') {
-                                clearInterval(paymentTimer);
-                                resolve(true);
-                            } else if (statusUpper === 'FAILED' || statusUpper === 'CANCELLED' || statusUpper === 'CANCELED') {
-                                clearInterval(paymentTimer);
-                                reject(new Error('Payment failed or cancelled'));
-                            } else if (attempts >= maxAttempts) {
-                                clearInterval(paymentTimer);
-                                reject(new Error('Verification timeout'));
-                            }
-                        } catch (error) {
-                            console.error('Status check error:', error);
-                            if (attempts >= maxAttempts) {
-                                clearInterval(paymentTimer);
-                                reject(new Error('Verification failed'));
-                            }
-                        }
-                    }, 3000);
-                });
-            }
-
-            // ================================================================
-            // 7. MANUAL PAYMENT FALLBACK (SweetAlert2)
-            // ================================================================
-            function showManualPaymentModal(fee) {
-                return new Promise((resolve) => {
-                    Swal.fire({
-                        title: 'Manual Payment',
-                        html: `
-                            <div style="text-align: left; font-size: 0.95rem;">
-                                <p style="margin-bottom: 0.75rem; color: var(--gray-700);">
-                                    <strong>STK push could not be sent.</strong> Please pay manually using M-Pesa.
-                                </p>
-                                <div style="background: #f0f9ff; padding: 1rem; border-radius: 10px; margin: 0.75rem 0; border: 1px solid #dce5dc;">
-                                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.25rem;">
-                                        <span style="font-weight: 600;">Till Number:</span>
-                                        <span style="display: flex; align-items: center; gap: 0.5rem;">
-                                            <span style="font-size: 1.2rem; font-weight: 700; color: var(--primary);">1554026</span>
-                                            <button id="copy-till-btn" style="background: var(--primary); color: white; border: none; border-radius: 6px; padding: 0.25rem 0.75rem; font-size: 0.8rem; cursor: pointer; display: inline-flex; align-items: center; gap: 0.3rem;">
-                                                <i class="fas fa-copy"></i> Copy
-                                            </button>
-                                        </span>
-                                    </div>
-                                    <div style="display: flex; justify-content: space-between; margin: 0.25rem 0;">
-                                        <span style="font-weight: 600;">Amount:</span>
-                                        <span style="font-size: 1.2rem; font-weight: 700; color: var(--primary);">KES ${fee.toLocaleString()}</span>
-                                    </div>
-                                </div>
-                                <p style="font-size: 0.9rem; color: #666; margin-bottom: 0.5rem;">Follow these steps:</p>
-                                <ol style="font-size: 0.9rem; color: #666; padding-left: 1.5rem; margin-bottom: 0.75rem;">
-                                    <li>Go to M-Pesa menu</li>
-                                    <li>Select "Lipa na M-Pesa"</li>
-                                    <li>Choose "Till Number"</li>
-                                    <li>Enter Till Number <strong>1554026</strong></li>
-                                    <li>Enter the amount <strong>KES ${fee.toLocaleString()}</strong></li>
-                                </ol>
-                                <p style="margin-top: 0.5rem; font-size: 0.95rem;">After payment, paste the confirmation message you received from M-Pesa below:</p>
-                                <textarea id="mpesa-confirmation" rows="3" style="width:100%; padding: 0.75rem; border: 2px solid #dce5dc; border-radius: 8px; resize: vertical; font-family: inherit; margin-top: 0.25rem;"></textarea>
-                                <div id="manual-error" style="color: #dc3545; font-size: 0.9rem; margin-top: 0.5rem; display: none;">Invalid Mpesa message.</div>
-                            </div>
-                        `,
-                        icon: false,
-                        showCancelButton: true,
-                        confirmButtonText: 'Verify Payment',
-                        cancelButtonText: 'Cancel',
-                        buttonsStyling: false,
-                        customClass: {
-                            confirmButton: 'swal2-confirm',
-                            cancelButton: 'swal2-cancel',
-                            actions: 'swal2-actions'
-                        },
-                        allowOutsideClick: false,
-                        didOpen: () => {
-                            const copyBtn = document.getElementById('copy-till-btn');
-                            if (copyBtn) {
-                                copyBtn.addEventListener('click', () => {
-                                    navigator.clipboard.writeText('1554026').then(() => {
-                                        copyBtn.innerHTML = '<i class="fas fa-check"></i> Copied!';
-                                        setTimeout(() => { copyBtn.innerHTML = '<i class="fas fa-copy"></i> Copy'; }, 2000);
-                                    });
-                                });
-                            }
-                        },
-                        preConfirm: async () => {
-                            const msg = document.getElementById('mpesa-confirmation').value.trim();
-                            const errEl = document.getElementById('manual-error');
-                            if (!msg) {
-                                errEl.style.display = 'block';
-                                errEl.textContent = 'Invalid Mpesa message.';
-                                return false;
-                            }
-                            Swal.showLoading();
-                            await new Promise(resolve => setTimeout(resolve, 2000));
-                            Swal.hideLoading();
-                            const feeStr = fee.toString();
-                            if (msg.includes(feeStr)) {
-                                return true;
-                            } else {
-                                errEl.style.display = 'block';
-                                errEl.textContent = 'Invalid Mpesa message.';
-                                return false;
-                            }
-                        }
-                    }).then(result => {
-                        if (result.isConfirmed) resolve(true);
-                        else resolve(false);
-                    });
-                });
-            }
-
-            // ================================================================
-            // 8. MAIN PAYMENT FLOW
-            // ================================================================
-            async function processPayment(job, phoneNumber) {
-                try {
-                    document.getElementById('stkStep1').style.display = 'none';
-                    stkWait.classList.add('active');
-                    isWaiting = true;
-
-                    let seconds = 0;
-                    if (stkTimerInterval) clearInterval(stkTimerInterval);
-                    stkTimerInterval = setInterval(() => {
-                        seconds++;
-                        const mins = Math.floor(seconds/60);
-                        const secs = seconds%60;
-                        stkTimer.textContent = `Verifying payment... ${String(mins).padStart(2,'0')}:${String(secs).padStart(2,'0')}`;
-                    }, 1000);
-
-                    let normalized = normalizePhoneManually(phoneNumber);
-                    if (!normalized || normalized.length !== 12) {
-                        throw new Error('Invalid phone number');
-                    }
-
-                    const response = await sendPayHeroSTK(normalized, job.fee);
-                    paymentReference = response.reference;
-
-                    const success = await checkPaymentStatus(paymentReference, 20);
-                    if (success) {
-                        window.location.href = 'dash.html';
-                    } else {
-                        throw new Error('Payment verification failed');
-                    }
-                } catch (error) {
-                    console.error('Payment error:', error);
-                    stkWait.classList.remove('active');
-                    document.getElementById('stkStep1').style.display = 'block';
-                    isWaiting = false;
-                    if (stkTimerInterval) { clearInterval(stkTimerInterval); stkTimerInterval = null; }
-                    if (paymentTimer) { clearInterval(paymentTimer); paymentTimer = null; }
-
-                    const manualVerified = await showManualPaymentModal(job.fee);
-                    if (manualVerified) {
-                        window.location.href = 'dash.html';
-                    } else {
-                        showToast('Application cancelled.', 'error');
-                    }
-                }
-            }
-
-            stkInitiate.addEventListener('click', () => {
-                const phone = stkPhone.value.trim();
-                if (!phone || phone.length < 10) {
-                    showToast('Please enter a valid M-Pesa phone number.', 'error');
-                    return;
-                }
-                if (!currentJob) return;
-                const normalized = normalizePhoneForBackend(phone);
-                if (!normalized) {
-                    showToast('Please enter a valid Kenyan phone number (e.g. 0712345678).', 'error');
-                    return;
-                }
-                processPayment(currentJob, phone);
-            });
-
-            // ================================================================
-            // 9. INIT
+            // INIT
             // ================================================================
             renderJobs('all');
-
-            const styleOverride = document.createElement('style');
-            styleOverride.textContent = `
-                .swal2-popup { border-radius: 20px !important; padding: 24px 20px 20px !important; max-width: 380px !important; width: 92% !important; }
-                .swal2-title { font-size: 1.2rem !important; color: var(--primary) !important; font-weight: 700 !important; margin-bottom: 12px !important; }
-                .swal2-html-container { font-size: 0.9rem !important; color: #1a1a1a !important; line-height: 1.5 !important; margin:0 !important; padding:0 !important; }
-                .swal2-actions { flex-direction: column !important; width: 100% !important; gap: 8px !important; margin-top: 16px !important; }
-                .swal2-actions .swal2-confirm, .swal2-actions .swal2-cancel { width: 100% !important; margin:0 !important; border-radius: 12px !important; padding: 14px 18px !important; font-size: 1rem !important; font-weight: 600 !important; box-sizing: border-box !important; justify-content: center !important; min-height: 52px !important; }
-                .swal2-actions .swal2-confirm { background: linear-gradient(90deg, var(--primary), var(--primary-dark)) !important; border: none !important; color: #fff !important; box-shadow: 0 6px 16px rgba(15,124,63,0.25) !important; }
-                .swal2-actions .swal2-confirm:hover { box-shadow: 0 8px 24px rgba(15,124,63,0.35) !important; transform: translateY(-1px); }
-                .swal2-actions .swal2-cancel { background: #f1f5f1 !important; border: 1px solid #dce5dc !important; color: #1a2a1a !important; box-shadow: none !important; }
-                .swal2-actions .swal2-cancel:hover { background: #e8efe8 !important; border-color: #c0d0c0 !important; }
-                .swal2-icon { display: none !important; }
-            `;
-            document.head.appendChild(styleOverride);
         })();
     </script>
 </body>
