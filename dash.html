@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Application Submitted – Quickmart</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #f0f9ff 0%, #e6f5ed 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem;
+        }
+        .card {
+            background: #fff;
+            max-width: 520px;
+            width: 100%;
+            padding: 3rem 2.5rem;
+            border-radius: 24px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.12);
+            text-align: center;
+            animation: fadeUp 0.6s ease;
+        }
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .icon {
+            font-size: 4rem;
+            color: #0f7c3f;
+            background: #dcfce7;
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+        }
+        h1 {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: #0f172a;
+            margin-bottom: 0.5rem;
+        }
+        .sub {
+            font-size: 1rem;
+            color: #475569;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+        .highlight {
+            color: #0f7c3f;
+            font-weight: 700;
+        }
+        .divider {
+            height: 2px;
+            background: #e2e8f0;
+            margin: 1.5rem 0;
+        }
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            text-align: left;
+            margin-bottom: 2rem;
+        }
+        .info-item {
+            background: #f8fafc;
+            padding: 0.8rem 1rem;
+            border-radius: 12px;
+            border: 1px solid #e2e8f0;
+        }
+        .info-item .label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #94a3b8;
+            font-weight: 600;
+        }
+        .info-item .value {
+            font-weight: 700;
+            color: #0f172a;
+            margin-top: 0.2rem;
+        }
+        .btn-home {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 0.8rem 2.5rem;
+            background: #0f7c3f;
+            color: #fff;
+            border: none;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 0 4px 16px rgba(15,124,63,0.3);
+            text-decoration: none;
+        }
+        .btn-home:hover {
+            background: #0a5e2f;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(15,124,63,0.4);
+        }
+        @media (max-width: 480px) {
+            .card { padding: 2rem 1.5rem; }
+            .info-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <div class="icon"><i class="fas fa-check-circle"></i></div>
+        <h1>Application Submitted!</h1>
+        <p class="sub">
+            Thank you for applying to <span class="highlight">Quickmart</span>.
+            Your job application has been received successfully.
+        </p>
+        <div class="divider"></div>
+        <div class="info-grid">
+            <div class="info-item">
+                <div class="label">Status</div>
+                <div class="value" style="color:#0f7c3f;">Pending Review</div>
+            </div>
+            <div class="info-item">
+                <div class="label">Response Time</div>
+                <div class="value">5 Business Days</div>
+            </div>
+        </div>
+        <p style="font-size: 0.95rem; color: #475569; margin-bottom: 1.8rem;">
+            You will be contacted via phone or email within <strong>5 business days</strong> for further finalisation.
+        </p>
+        <a href="jobs.html" class="btn-home"><i class="fas fa-arrow-left"></i> Back to Jobs</a>
+    </div>
+</body>
+</html>

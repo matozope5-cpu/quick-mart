@@ -1,0 +1,2031 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Quickmart Supermarket – Careers</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&display=swap" rel="stylesheet"/>
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"/>
+    <style>
+        /* ===== RESET & BASE ===== */
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #0f7c3f;
+            --primary-dark: #0a5e2f;
+            --primary-light: #e6f5ed;
+            --accent: #d42e2e;
+            --accent-light: #fde8e8;
+            --gold: #f5a623;
+            --gray-50: #f8fafc;
+            --gray-100: #f1f5f9;
+            --gray-200: #e2e8f0;
+            --gray-300: #cbd5e1;
+            --gray-400: #94a3b8;
+            --gray-500: #64748b;
+            --gray-600: #475569;
+            --gray-700: #334155;
+            --gray-800: #1e293b;
+            --gray-900: #0f172a;
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
+            --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.08);
+            --shadow-lg: 0 10px 40px rgba(0, 0, 0, 0.12);
+            --shadow-xl: 0 20px 60px rgba(0, 0, 0, 0.15);
+            --radius: 12px;
+            --radius-lg: 20px;
+            --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--gray-50);
+            color: var(--gray-800);
+            line-height: 1.6;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        button {
+            cursor: pointer;
+            font-family: inherit;
+            border: none;
+            outline: none;
+        }
+        input,
+        select,
+        textarea {
+            font-family: inherit;
+            outline: none;
+        }
+
+        /* ===== PAGE CONTAINER ===== */
+        .page {
+            display: none;
+            animation: fadeIn 0.5s ease forwards;
+            min-height: 100vh;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+            0%,
+            100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        /* ===== HEADER / NAV ===== */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(226, 232, 240, 0.6);
+            padding: 0 2rem;
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: var(--transition);
+        }
+
+        .navbar.scrolled {
+            box-shadow: var(--shadow-sm);
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 800;
+            font-size: 1.35rem;
+            color: var(--primary);
+        }
+
+        .nav-brand i {
+            font-size: 1.6rem;
+            color: var(--accent);
+        }
+
+        .nav-brand span {
+            color: var(--gray-900);
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-links button {
+            padding: 0.5rem 1.2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            background: transparent;
+            color: var(--gray-600);
+            transition: var(--transition);
+        }
+
+        .nav-links button:hover {
+            background: var(--gray-100);
+            color: var(--gray-900);
+        }
+
+        .nav-links button.active {
+            background: var(--primary);
+            color: #fff;
+        }
+
+        .nav-links button.active:hover {
+            background: var(--primary-dark);
+        }
+
+        .nav-cta {
+            background: var(--primary) !important;
+            color: #fff !important;
+            padding: 0.5rem 1.5rem !important;
+            border-radius: 50px !important;
+            font-weight: 700 !important;
+        }
+
+        .nav-cta:hover {
+            background: var(--primary-dark) !important;
+            transform: scale(1.02);
+        }
+
+        .mobile-toggle {
+            display: none;
+            background: none;
+            font-size: 1.5rem;
+            color: var(--gray-700);
+        }
+
+        /* ===== LANDING PAGE ===== */
+        #page-landing {
+            padding-top: 70px;
+        }
+
+        .hero {
+            position: relative;
+            min-height: 92vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(135deg, #f8fafc 0%, #e6f5ed 100%);
+            overflow: hidden;
+            padding: 2rem;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -40%;
+            right: -20%;
+            width: 70%;
+            height: 120%;
+            background: radial-gradient(ellipse, rgba(15, 124, 63, 0.08) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -30%;
+            left: -10%;
+            width: 50%;
+            height: 80%;
+            background: radial-gradient(ellipse, rgba(212, 46, 46, 0.06) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 780px;
+            animation: slideUp 0.8s ease forwards;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--primary-light);
+            color: var(--primary-dark);
+            padding: 0.4rem 1.2rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 0.3px;
+            margin-bottom: 1.5rem;
+            border: 1px solid rgba(15, 124, 63, 0.15);
+        }
+
+        .hero-badge i {
+            font-size: 0.7rem;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.6rem, 6vw, 4.2rem);
+            font-weight: 900;
+            line-height: 1.1;
+            color: var(--gray-900);
+            margin-bottom: 1.2rem;
+        }
+
+        .hero h1 .highlight {
+            color: var(--primary);
+            position: relative;
+        }
+
+        .hero h1 .highlight::after {
+            content: '';
+            position: absolute;
+            bottom: 4px;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: var(--gold);
+            border-radius: 4px;
+            opacity: 0.3;
+        }
+
+        .hero p {
+            font-size: 1.15rem;
+            color: var(--gray-600);
+            max-width: 560px;
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+
+        .hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 0.9rem 2.2rem;
+            background: var(--primary);
+            color: #fff;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1rem;
+            transition: var(--transition);
+            box-shadow: 0 4px 16px rgba(15, 124, 63, 0.3);
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 28px rgba(15, 124, 63, 0.35);
+        }
+
+        .btn-secondary {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 0.9rem 2.2rem;
+            background: transparent;
+            color: var(--gray-700);
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1rem;
+            border: 2px solid var(--gray-300);
+            transition: var(--transition);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+            transform: translateY(-2px);
+            background: var(--primary-light);
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 3rem;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--gray-200);
+        }
+
+        .hero-stats .stat {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .hero-stats .stat .number {
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: var(--gray-900);
+        }
+
+        .hero-stats .stat .label {
+            font-size: 0.8rem;
+            color: var(--gray-500);
+            font-weight: 500;
+        }
+
+        .hero-visual {
+            position: relative;
+            z-index: 2;
+            flex: 1;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            margin-left: 2rem;
+        }
+
+        .hero-visual .decoration {
+            width: 380px;
+            height: 380px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            border-radius: 50%;
+            opacity: 0.1;
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .hero-visual .card-float {
+            background: #fff;
+            padding: 1.8rem 2.2rem;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-xl);
+            width: 320px;
+            position: relative;
+            z-index: 3;
+            border: 1px solid rgba(226, 232, 240, 0.4);
+        }
+
+        .hero-visual .card-float .row {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 0.6rem 0;
+            border-bottom: 1px solid var(--gray-100);
+        }
+
+        .hero-visual .card-float .row:last-child {
+            border-bottom: none;
+        }
+
+        .hero-visual .card-float .icon-circle {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--primary-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-size: 1rem;
+            flex-shrink: 0;
+        }
+
+        .hero-visual .card-float .info h4 {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--gray-900);
+        }
+
+        .hero-visual .card-float .info p {
+            font-size: 0.75rem;
+            color: var(--gray-500);
+            margin: 0;
+        }
+
+        /* ===== PAGE 2: DETAILS ===== */
+        #page-details {
+            padding: 100px 2rem 4rem;
+            max-width: 820px;
+            margin: 0 auto;
+        }
+
+        .details-header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .details-header h2 {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--gray-900);
+        }
+
+        .details-header p {
+            color: var(--gray-500);
+            margin-top: 0.3rem;
+        }
+
+        .details-form {
+            background: #fff;
+            padding: 2.5rem 3rem;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--gray-200);
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.2rem 1.8rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .form-group.full {
+            grid-column: 1 / -1;
+        }
+
+        .form-group label {
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--gray-700);
+            letter-spacing: 0.3px;
+        }
+
+        .form-group label .required {
+            color: var(--accent);
+            margin-left: 2px;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            padding: 0.7rem 1rem;
+            border: 1.5px solid var(--gray-200);
+            border-radius: var(--radius);
+            font-size: 0.95rem;
+            transition: var(--transition);
+            background: var(--gray-50);
+            width: 100%;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(15, 124, 63, 0.1);
+            background: #fff;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 90px;
+        }
+
+        .form-group .file-upload {
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 0.6rem 1rem;
+            border: 1.5px dashed var(--gray-300);
+            border-radius: var(--radius);
+            background: var(--gray-50);
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .form-group .file-upload:hover {
+            border-color: var(--primary);
+            background: var(--primary-light);
+        }
+
+        .form-group .file-upload input[type="file"] {
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        .form-group .file-upload i {
+            font-size: 1.2rem;
+            color: var(--primary);
+        }
+
+        .form-group .file-upload span {
+            font-size: 0.85rem;
+            color: var(--gray-500);
+        }
+
+        .form-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--gray-200);
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .form-actions .btn-primary {
+            padding: 0.8rem 2.8rem;
+            font-size: 1rem;
+        }
+
+        .form-actions .btn-secondary {
+            padding: 0.8rem 2rem;
+            font-size: 0.9rem;
+        }
+
+        /* ===== PAGE 3: JOBS ===== */
+        #page-jobs {
+            padding: 100px 2rem 4rem;
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        .jobs-header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .jobs-header h2 {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--gray-900);
+        }
+
+        .jobs-header p {
+            color: var(--gray-500);
+            max-width: 560px;
+            margin: 0.3rem auto 0;
+        }
+
+        .jobs-filters {
+            display: flex;
+            gap: 0.6rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .jobs-filters button {
+            padding: 0.4rem 1.2rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            background: var(--gray-100);
+            color: var(--gray-600);
+            transition: var(--transition);
+        }
+
+        .jobs-filters button.active {
+            background: var(--primary);
+            color: #fff;
+        }
+
+        .jobs-filters button:hover:not(.active) {
+            background: var(--gray-200);
+        }
+
+        .jobs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .job-card {
+            background: #fff;
+            border-radius: var(--radius-lg);
+            padding: 1.8rem 1.8rem 1.8rem;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--gray-200);
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .job-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--gray-300);
+        }
+
+        .job-card .job-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 0.6rem;
+        }
+
+        .job-card .job-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--gray-900);
+        }
+
+        .job-card .job-badge {
+            font-size: 0.65rem;
+            font-weight: 700;
+            padding: 0.2rem 0.8rem;
+            border-radius: 50px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            flex-shrink: 0;
+            margin-top: 0.2rem;
+        }
+
+        .job-card .job-badge.available {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .job-card .job-badge.unavailable {
+            background: #fef2f2;
+            color: #991b1b;
+        }
+
+        .job-card .job-tasks {
+            margin: 0.6rem 0 1rem;
+            padding-left: 1.2rem;
+            font-size: 0.85rem;
+            color: var(--gray-600);
+            line-height: 1.7;
+            flex: 1;
+        }
+
+        .job-card .job-tasks li {
+            list-style: disc;
+        }
+
+        .job-card .job-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 0.8rem;
+            padding-top: 0.8rem;
+            border-top: 1px solid var(--gray-100);
+            flex-wrap: wrap;
+            gap: 0.6rem;
+        }
+
+        .job-card .job-salary {
+            font-weight: 700;
+            color: var(--primary-dark);
+            font-size: 0.95rem;
+        }
+
+        .job-card .job-salary .unavailable-text {
+            color: var(--gray-400);
+            font-weight: 400;
+            font-size: 0.8rem;
+        }
+
+        .job-card .job-fee {
+            font-size: 0.75rem;
+            color: var(--gray-500);
+            background: var(--gray-100);
+            padding: 0.2rem 0.8rem;
+            border-radius: 50px;
+        }
+
+        .btn-apply {
+            padding: 0.5rem 1.4rem;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.8rem;
+            background: var(--primary);
+            color: #fff;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .btn-apply:hover {
+            background: var(--primary-dark);
+            transform: scale(1.02);
+        }
+
+        .btn-apply:disabled {
+            background: var(--gray-300);
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* ===== STK PUSH MODAL ===== */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem;
+            animation: fadeIn 0.25s ease;
+        }
+
+        .modal-overlay.open {
+            display: flex;
+        }
+
+        .modal-box {
+            background: #fff;
+            max-width: 460px;
+            width: 100%;
+            border-radius: var(--radius-lg);
+            padding: 2.2rem 2rem 2rem;
+            box-shadow: var(--shadow-xl);
+            animation: slideUp 0.35s ease;
+            position: relative;
+        }
+
+        .modal-box .modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1.2rem;
+            background: none;
+            font-size: 1.4rem;
+            color: var(--gray-400);
+            transition: var(--transition);
+        }
+
+        .modal-box .modal-close:hover {
+            color: var(--gray-700);
+            transform: rotate(90deg);
+        }
+
+        .modal-box .modal-icon {
+            text-align: center;
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .modal-box h3 {
+            font-size: 1.3rem;
+            font-weight: 800;
+            text-align: center;
+            color: var(--gray-900);
+        }
+
+        .modal-box .modal-sub {
+            text-align: center;
+            color: var(--gray-500);
+            font-size: 0.9rem;
+            margin: 0.2rem 0 1.5rem;
+        }
+
+        .modal-box .modal-job {
+            background: var(--gray-50);
+            padding: 0.6rem 1rem;
+            border-radius: var(--radius);
+            text-align: center;
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--gray-700);
+            margin-bottom: 1.2rem;
+            border: 1px solid var(--gray-200);
+        }
+
+        .modal-box .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .modal-box .form-group label {
+            font-size: 0.75rem;
+        }
+
+        .modal-box .stk-sim {
+            background: var(--gray-50);
+            border-radius: var(--radius);
+            padding: 1.2rem;
+            margin: 1rem 0;
+            border: 1px solid var(--gray-200);
+            display: none;
+        }
+
+        .modal-box .stk-sim.active {
+            display: block;
+        }
+
+        .modal-box .stk-sim .stk-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 0.8rem;
+        }
+
+        .modal-box .stk-sim .stk-header i {
+            font-size: 1.8rem;
+            color: var(--gold);
+        }
+
+        .modal-box .stk-sim .stk-header h4 {
+            font-size: 0.95rem;
+            font-weight: 700;
+        }
+
+        .modal-box .stk-sim .stk-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.3rem 0;
+            font-size: 0.85rem;
+            border-bottom: 1px solid var(--gray-100);
+        }
+
+        .modal-box .stk-sim .stk-row .label {
+            color: var(--gray-500);
+        }
+
+        .modal-box .stk-sim .stk-row .value {
+            font-weight: 600;
+        }
+
+        .modal-box .stk-sim .stk-pin {
+            display: flex;
+            gap: 0.6rem;
+            justify-content: center;
+            margin: 1rem 0 0.6rem;
+        }
+
+        .modal-box .stk-sim .stk-pin input {
+            width: 44px;
+            height: 50px;
+            text-align: center;
+            font-size: 1.2rem;
+            font-weight: 700;
+            border: 2px solid var(--gray-200);
+            border-radius: var(--radius);
+            background: #fff;
+            transition: var(--transition);
+        }
+
+        .modal-box .stk-sim .stk-pin input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(15, 124, 63, 0.15);
+        }
+
+        .modal-box .stk-sim .stk-status {
+            text-align: center;
+            font-size: 0.85rem;
+            font-weight: 600;
+            padding: 0.5rem;
+            border-radius: var(--radius);
+            margin-top: 0.8rem;
+            display: none;
+        }
+
+        .modal-box .stk-sim .stk-status.success {
+            display: block;
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .modal-box .stk-sim .stk-status.failed {
+            display: block;
+            background: #fef2f2;
+            color: #991b1b;
+        }
+
+        .modal-box .modal-actions {
+            display: flex;
+            gap: 0.8rem;
+            margin-top: 1.2rem;
+        }
+
+        .modal-box .modal-actions .btn-primary {
+            flex: 1;
+            justify-content: center;
+            padding: 0.8rem;
+        }
+
+        .modal-box .modal-actions .btn-secondary {
+            flex: 0.5;
+            justify-content: center;
+            padding: 0.8rem;
+        }
+
+        /* ===== TOAST ===== */
+        .toast {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            z-index: 10000;
+            background: var(--gray-900);
+            color: #fff;
+            padding: 0.8rem 1.6rem;
+            border-radius: var(--radius);
+            font-weight: 600;
+            font-size: 0.9rem;
+            box-shadow: var(--shadow-lg);
+            transform: translateY(120px);
+            opacity: 0;
+            transition: all 0.4s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .toast.success {
+            background: #166534;
+        }
+
+        .toast.error {
+            background: #991b1b;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 1024px) {
+            .hero-visual .card-float {
+                width: 260px;
+            }
+            .hero-visual .decoration {
+                width: 280px;
+                height: 280px;
+            }
+        }
+
+        @media (max-width: 900px) {
+            .hero {
+                flex-direction: column;
+                text-align: center;
+                padding: 3rem 1.5rem;
+                min-height: auto;
+                padding-top: 100px;
+            }
+            .hero-content {
+                max-width: 100%;
+            }
+            .hero p {
+                max-width: 100%;
+                margin-left: auto;
+                margin-right: auto;
+            }
+            .hero-actions {
+                justify-content: center;
+            }
+            .hero-stats {
+                justify-content: center;
+                gap: 2rem;
+                flex-wrap: wrap;
+            }
+            .hero-visual {
+                margin-left: 0;
+                margin-top: 2rem;
+                justify-content: center;
+                width: 100%;
+            }
+            .hero-visual .card-float {
+                width: 100%;
+                max-width: 360px;
+            }
+            .hero-visual .decoration {
+                display: none;
+            }
+            .details-form {
+                padding: 1.8rem;
+            }
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+            .jobs-grid {
+                grid-template-columns: 1fr;
+            }
+            .navbar {
+                padding: 0 1rem;
+            }
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                right: 0;
+                background: rgba(255, 255, 255, 0.98);
+                padding: 1rem;
+                border-bottom: 1px solid var(--gray-200);
+                box-shadow: var(--shadow-md);
+                gap: 0.3rem;
+            }
+            .nav-links.open {
+                display: flex;
+            }
+            .nav-links button {
+                width: 100%;
+                text-align: center;
+                padding: 0.7rem;
+            }
+            .mobile-toggle {
+                display: block;
+            }
+            .form-actions {
+                flex-direction: column-reverse;
+            }
+            .form-actions .btn-primary,
+            .form-actions .btn-secondary {
+                width: 100%;
+                justify-content: center;
+            }
+            #page-details,
+            #page-jobs {
+                padding: 90px 1rem 3rem;
+            }
+            .modal-box {
+                padding: 1.8rem 1.2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            .hero p {
+                font-size: 1rem;
+            }
+            .hero-stats .stat .number {
+                font-size: 1.2rem;
+            }
+            .job-card .job-footer {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .job-card .btn-apply {
+                justify-content: center;
+            }
+            .modal-box .stk-sim .stk-pin input {
+                width: 36px;
+                height: 42px;
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== NAVBAR ===== -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-brand">
+            <i class="fas fa-store"></i>
+            Quick<span>mart</span>
+        </div>
+        <div class="nav-links" id="navLinks">
+            <button class="active" data-page="landing"><i class="fas fa-home"></i> Home</button>
+            <button data-page="details"><i class="fas fa-user-edit"></i> Details</button>
+            <button data-page="jobs"><i class="fas fa-briefcase"></i> Jobs</button>
+            <button class="nav-cta" data-page="jobs"><i class="fas fa-paper-plane"></i> Apply Now</button>
+        </div>
+        <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle menu">
+            <i class="fas fa-bars"></i>
+        </button>
+    </nav>
+
+    <!-- ============================================================ -->
+    <!-- ===== PAGE 1: LANDING ===== -->
+    <!-- ============================================================ -->
+    <section class="page active" id="page-landing">
+        <div class="hero">
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <i class="fas fa-bolt"></i> We're Hiring – Join the Quickmart Family
+                </div>
+                <h1>
+                    Build Your Career at
+                    <span class="highlight">Quickmart</span>
+                    Supermarket
+                </h1>
+                <p>
+                    Kenya's trusted supermarket chain is looking for passionate,
+                    dedicated individuals to join our growing team. Explore
+                    exciting opportunities across all departments.
+                </p>
+                <div class="hero-actions">
+                    <a href="#" class="btn-primary" data-page="jobs">
+                        <i class="fas fa-search"></i> View Open Positions
+                    </a>
+                    <a href="#" class="btn-secondary" data-page="details">
+                        <i class="fas fa-arrow-right"></i> Start Application
+                    </a>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat">
+                        <span class="number">18+</span>
+                        <span class="label">Departments</span>
+                    </div>
+                    <div class="stat">
+                        <span class="number">50+</span>
+                        <span class="label">Open Roles</span>
+                    </div>
+                    <div class="stat">
+                        <span class="number">2.4K</span>
+                        <span class="label">Team Members</span>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="decoration"></div>
+                <div class="card-float">
+                    <div class="row">
+                        <div class="icon-circle"><i class="fas fa-users"></i></div>
+                        <div class="info">
+                            <h4>Great Culture</h4>
+                            <p>Inclusive &amp; supportive environment</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="icon-circle"><i class="fas fa-trophy"></i></div>
+                        <div class="info">
+                            <h4>Career Growth</h4>
+                            <p>Training &amp; development programs</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="icon-circle"><i class="fas fa-hand-holding-heart"></i></div>
+                        <div class="info">
+                            <h4>Staff Benefits</h4>
+                            <p>Competitive packages &amp; perks</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- ===== PAGE 2: DETAILS ===== -->
+    <!-- ============================================================ -->
+    <section class="page" id="page-details">
+        <div class="details-header">
+            <h2><i class="fas fa-user-edit" style="color:var(--primary);margin-right:10px;"></i>Personal Details</h2>
+            <p>Fill in your information so we can process your application.</p>
+        </div>
+        <form class="details-form" id="detailsForm" novalidate>
+            <div class="form-grid">
+                <div class="form-group">
+                    <label>Full Name <span class="required">*</span></label>
+                    <input type="text" id="fullName" placeholder="e.g. Jane Muthoni" required />
+                </div>
+                <div class="form-group">
+                    <label>Email Address <span class="required">*</span></label>
+                    <input type="email" id="email" placeholder="jane@example.com" required />
+                </div>
+                <div class="form-group">
+                    <label>Phone Number <span class="required">*</span></label>
+                    <input type="tel" id="phone" placeholder="0712 345 678" required />
+                </div>
+                <div class="form-group">
+                    <label>Date of Birth</label>
+                    <input type="date" id="dob" />
+                </div>
+                <div class="form-group">
+                    <label>Gender</label>
+                    <select id="gender">
+                        <option value="">Select...</option>
+                        <option value="Female">Female</option>
+                        <option value="Male">Male</option>
+                        <option value="Non-binary">Non-binary</option>
+                        <option value="Prefer not to say">Prefer not to say</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Highest Education <span class="required">*</span></label>
+                    <select id="education" required>
+                        <option value="">Select...</option>
+                        <option value="KCSE">KCSE</option>
+                        <option value="Certificate">Certificate</option>
+                        <option value="Diploma">Diploma</option>
+                        <option value="Bachelor's Degree">Bachelor's Degree</option>
+                        <option value="Master's Degree">Master's Degree</option>
+                        <option value="PhD">PhD</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Years of Experience</label>
+                    <select id="experience">
+                        <option value="0">0 – Fresh Graduate</option>
+                        <option value="1">1 year</option>
+                        <option value="2">2 years</option>
+                        <option value="3">3 years</option>
+                        <option value="4">4 years</option>
+                        <option value="5">5+ years</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Current Location <span class="required">*</span></label>
+                    <input type="text" id="location" placeholder="e.g. Nairobi" required />
+                </div>
+                <div class="form-group full">
+                    <label>Upload CV <span class="required">*</span></label>
+                    <div class="file-upload">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                        <span id="fileLabel">Click or drag to upload (PDF, DOC, DOCX)</span>
+                        <input type="file" id="cvFile" accept=".pdf,.doc,.docx" required />
+                    </div>
+                </div>
+                <div class="form-group full">
+                    <label>Cover Note (optional)</label>
+                    <textarea id="coverNote" placeholder="Tell us why you'd be a great fit for Quickmart..."></textarea>
+                </div>
+            </div>
+            <div class="form-actions">
+                <button type="button" class="btn-secondary" data-page="landing">
+                    <i class="fas fa-arrow-left"></i> Back
+                </button>
+                <button type="submit" class="btn-primary" id="detailsSubmit">
+                    <i class="fas fa-arrow-right"></i> Continue to Jobs
+                </button>
+            </div>
+        </form>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- ===== PAGE 3: JOBS ===== -->
+    <!-- ============================================================ -->
+    <section class="page" id="page-jobs">
+        <div class="jobs-header">
+            <h2><i class="fas fa-briefcase" style="color:var(--primary);margin-right:10px;"></i>Available Positions</h2>
+            <p>Browse through our open roles. Click <strong>Apply</strong> to start your application with a secure M-Pesa payment.</p>
+        </div>
+
+        <div class="jobs-filters">
+            <button class="active" data-filter="all">All</button>
+            <button data-filter="available">Available</button>
+            <button data-filter="unavailable">Unavailable</button>
+        </div>
+
+        <div class="jobs-grid" id="jobsGrid"></div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- ===== STK PUSH MODAL ===== -->
+    <!-- ============================================================ -->
+    <div class="modal-overlay" id="stkModal">
+        <div class="modal-box">
+            <button class="modal-close" id="modalClose"><i class="fas fa-times"></i></button>
+            <div class="modal-icon"><i class="fas fa-mobile-alt"></i></div>
+            <h3>M-Pesa STK Push</h3>
+            <p class="modal-sub">Complete your application with a secure payment</p>
+            <div class="modal-job" id="modalJobName">Position Name</div>
+
+            <!-- Step 1: Phone & Confirm -->
+            <div id="stkStep1">
+                <div class="form-group">
+                    <label>M-Pesa Phone Number <span class="required">*</span></label>
+                    <input type="tel" id="stkPhone" placeholder="0712 345 678" />
+                </div>
+                <div class="form-group">
+                    <label>Application Fee</label>
+                    <input type="text" id="stkFee" disabled style="background:var(--gray-100);font-weight:700;color:var(--primary-dark);" />
+                </div>
+                <div class="modal-actions">
+                    <button class="btn-secondary" id="stkCancel">Cancel</button>
+                    <button class="btn-primary" id="stkInitiate"><i class="fas fa-paper-plane"></i> Pay &amp; Apply</button>
+                </div>
+            </div>
+
+            <!-- Step 2: STK Simulation -->
+            <div class="stk-sim" id="stkSim">
+                <div class="stk-header">
+                    <i class="fas fa-spinner fa-pulse"></i>
+                    <h4>Waiting for M-Pesa PIN</h4>
+                </div>
+                <div class="stk-row">
+                    <span class="label">Amount</span>
+                    <span class="value" id="simAmount">KES 0</span>
+                </div>
+                <div class="stk-row">
+                    <span class="label">Paybill</span>
+                    <span class="value">247247</span>
+                </div>
+                <div class="stk-row">
+                    <span class="label">Account</span>
+                    <span class="value" id="simAccount">Quickmart</span>
+                </div>
+                <div class="stk-pin">
+                    <input type="password" maxlength="1" class="pin-input" />
+                    <input type="password" maxlength="1" class="pin-input" />
+                    <input type="password" maxlength="1" class="pin-input" />
+                    <input type="password" maxlength="1" class="pin-input" />
+                </div>
+                <button class="btn-primary" id="stkConfirmPin" style="width:100%;justify-content:center;margin-top:0.6rem;">
+                    <i class="fas fa-check"></i> Confirm PIN
+                </button>
+                <div class="stk-status" id="stkStatus"></div>
+                <div style="margin-top:0.8rem;text-align:center;">
+                    <button class="btn-secondary" id="stkRetry" style="font-size:0.8rem;padding:0.4rem 1.2rem;display:none;">
+                        <i class="fas fa-redo"></i> Retry
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== TOAST ===== -->
+    <div class="toast" id="toast">
+        <i class="fas fa-check-circle"></i>
+        <span id="toastMessage">Success!</span>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- ===== JAVASCRIPT ===== -->
+    <!-- ============================================================ -->
+    <script>
+        (function() {
+            'use strict';
+
+            // -------- DATA --------
+            const JOBS = [{
+                id: 1,
+                title: 'Store Manager',
+                available: true,
+                salary: 'KES 150,000',
+                fee: 2500,
+                tasks: [
+                    'Oversee daily store operations and staff management',
+                    'Ensure customer satisfaction and resolve complaints',
+                    'Manage inventory, budgets, and financial reporting',
+                    'Implement company policies and safety standards',
+                    'Drive sales growth and promotional activities'
+                ]
+            }, {
+                id: 2,
+                title: 'Assistant Store Manager',
+                available: true,
+                salary: 'KES 100,000',
+                fee: 2000,
+                tasks: [
+                    'Support the Store Manager in daily operations',
+                    'Supervise department heads and staff scheduling',
+                    'Monitor inventory levels and place orders',
+                    'Assist in staff training and performance reviews',
+                    'Handle customer escalations and store compliance'
+                ]
+            }, {
+                id: 3,
+                title: 'Department Supervisor',
+                available: true,
+                salary: 'KES 70,000',
+                fee: 1500,
+                tasks: [
+                    'Supervise a specific department (e.g., Grocery, Fresh Produce)',
+                    'Ensure department targets and standards are met',
+                    'Manage staff rotas and training within the department',
+                    'Monitor product quality, pricing, and displays',
+                    'Report on departmental performance'
+                ]
+            }, {
+                id: 4,
+                title: 'Cashier',
+                available: true,
+                salary: 'KES 45,000',
+                fee: 500,
+                tasks: [
+                    'Process customer transactions accurately and efficiently',
+                    'Handle cash, card, and mobile payments',
+                    'Maintain a clean and organized checkout area',
+                    'Assist customers with bagging and queries',
+                    'Balance cash drawer at the start and end of shift'
+                ]
+            }, {
+                id: 5,
+                title: 'Sales Associate',
+                available: true,
+                salary: 'KES 40,000',
+                fee: 400,
+                tasks: [
+                    'Assist customers with product selection and inquiries',
+                    'Maintain shelf stock and product displays',
+                    'Monitor inventory and report low-stock items',
+                    'Process returns and exchanges with care',
+                    'Participate in store promotions and events'
+                ]
+            }, {
+                id: 6,
+                title: 'Stock Clerk',
+                available: true,
+                salary: 'KES 38,000',
+                fee: 350,
+                tasks: [
+                    'Receive and verify incoming shipments',
+                    'Organize and maintain stockroom inventory',
+                    'Label and rotate stock according to FIFO principles',
+                    'Assist in periodic inventory counts',
+                    'Keep storage areas clean and safe'
+                ]
+            }, {
+                id: 7,
+                title: 'Customer Service Representative',
+                available: true,
+                salary: 'KES 42,000',
+                fee: 400,
+                tasks: [
+                    'Provide exceptional service at the customer service desk',
+                    'Handle customer complaints and resolve issues',
+                    'Process returns, exchanges, and refunds',
+                    'Assist with loyalty program inquiries',
+                    'Maintain a welcoming and helpful attitude'
+                ]
+            }, {
+                id: 8,
+                title: 'Bakery Associate',
+                available: true,
+                salary: 'KES 40,000',
+                fee: 400,
+                tasks: [
+                    'Prepare and bake fresh bread, pastries, and cakes',
+                    'Follow recipes and food safety guidelines',
+                    'Display baked goods attractively',
+                    'Monitor inventory of baking ingredients',
+                    'Maintain cleanliness of baking equipment and area'
+                ]
+            }, {
+                id: 9,
+                title: 'Deli Associate',
+                available: true,
+                salary: 'KES 40,000',
+                fee: 400,
+                tasks: [
+                    'Slice and prepare meats, cheeses, and salads',
+                    'Maintain deli counter cleanliness and food safety',
+                    'Assist customers with orders and recommendations',
+                    'Monitor inventory and rotate stock',
+                    'Operate slicing and preparation equipment'
+                ]
+            }, {
+                id: 10,
+                title: 'Meat Cutter',
+                available: true,
+                salary: 'KES 45,000',
+                fee: 450,
+                tasks: [
+                    'Cut, trim, and prepare meat products to customer specifications',
+                    'Maintain meat display cases and ensure freshness',
+                    'Follow food safety and hygiene standards',
+                    'Manage inventory and minimize waste',
+                    'Assist customers with meat selection and cooking tips'
+                ]
+            }, {
+                id: 11,
+                title: 'Produce Associate',
+                available: true,
+                salary: 'KES 38,000',
+                fee: 350,
+                tasks: [
+                    'Stock and rotate fresh fruits and vegetables',
+                    'Maintain produce displays and ensure quality',
+                    'Remove damaged or expired products',
+                    'Assist customers with product selection',
+                    'Keep produce area clean and organized'
+                ]
+            }, {
+                id: 12,
+                title: 'Receiving Clerk',
+                available: true,
+                salary: 'KES 40,000',
+                fee: 400,
+                tasks: [
+                    'Inspect and verify incoming deliveries against purchase orders',
+                    'Record receipt of goods and update inventory systems',
+                    'Coordinate with departments to distribute stock',
+                    'Handle returns and discrepancies with suppliers',
+                    'Maintain accurate receiving logs'
+                ]
+            }, {
+                id: 13,
+                title: 'Security Guard',
+                available: true,
+                salary: 'KES 35,000',
+                fee: 350,
+                tasks: [
+                    'Monitor store premises and ensure safety of customers and staff',
+                    'Prevent theft and respond to security incidents',
+                    'Conduct regular patrols of the store and parking area',
+                    'Check CCTV footage and maintain security logs',
+                    'Assist in emergency procedures and crowd control'
+                ]
+            }, {
+                id: 14,
+                title: 'Cleaner',
+                available: true,
+                salary: 'KES 30,000',
+                fee: 300,
+                tasks: [
+                    'Clean and maintain store floors, aisles, and restrooms',
+                    'Dispose of waste and ensure proper recycling',
+                    'Restock cleaning supplies and equipment',
+                    'Report maintenance issues to management',
+                    'Maintain a high standard of cleanliness and hygiene'
+                ]
+            }, {
+                id: 15,
+                title: 'IT Support',
+                available: true,
+                salary: 'KES 60,000',
+                fee: 1200,
+                tasks: [
+                    'Provide technical support for POS systems and store hardware',
+                    'Troubleshoot network and software issues',
+                    'Maintain and update computer systems and peripherals',
+                    'Assist staff with technology-related queries',
+                    'Ensure data security and backup procedures'
+                ]
+            }, {
+                id: 16,
+                title: 'Marketing Coordinator',
+                available: true,
+                salary: 'KES 65,000',
+                fee: 1500,
+                tasks: [
+                    'Plan and execute in-store marketing campaigns',
+                    'Manage social media and digital presence',
+                    'Coordinate with vendors and suppliers on promotions',
+                    'Analyze market trends and customer feedback',
+                    'Create engaging content for store communications'
+                ]
+            }, {
+                id: 17,
+                title: 'HR Assistant',
+                available: true,
+                salary: 'KES 55,000',
+                fee: 1000,
+                tasks: [
+                    'Assist with recruitment, onboarding, and training processes',
+                    'Maintain employee records and HR documentation',
+                    'Support payroll and benefits administration',
+                    'Coordinate staff events and wellness initiatives',
+                    'Respond to employee inquiries and policy questions'
+                ]
+            }, {
+                id: 18,
+                title: 'Accountant',
+                available: true,
+                salary: 'KES 70,000',
+                fee: 1500,
+                tasks: [
+                    'Manage financial records, ledgers, and reconciliations',
+                    'Prepare monthly financial reports and budgets',
+                    'Oversee accounts payable and receivable',
+                    'Ensure tax compliance and statutory deductions',
+                    'Analyze financial data to support business decisions'
+                ]
+            }, {
+                id: 19,
+                title: 'Regional Manager',
+                available: false,
+                salary: null,
+                fee: 0,
+                tasks: [
+                    'Oversee multiple store operations in a region',
+                    'Drive sales performance and operational excellence',
+                    'Develop and implement regional strategies',
+                    'Manage regional budgets and financial targets',
+                    'Lead and mentor store management teams'
+                ]
+            }, {
+                id: 20,
+                title: 'Supply Chain Director',
+                available: false,
+                salary: null,
+                fee: 0,
+                tasks: [
+                    'Lead the supply chain and logistics strategy',
+                    'Manage supplier relationships and procurement',
+                    'Optimize inventory levels and distribution networks',
+                    'Ensure cost efficiency and on-time deliveries',
+                    'Develop contingency plans for supply chain disruptions'
+                ]
+            }, {
+                id: 21,
+                title: 'Marketing Director',
+                available: false,
+                salary: null,
+                fee: 0,
+                tasks: [
+                    'Develop and execute the overall marketing strategy',
+                    'Drive brand awareness and customer engagement',
+                    'Manage marketing budgets and campaign ROI',
+                    'Lead the marketing team and external agencies',
+                    'Analyze market trends and consumer insights'
+                ]
+            }, {
+                id: 22,
+                title: 'Store Director',
+                available: false,
+                salary: null,
+                fee: 0,
+                tasks: [
+                    'Provide strategic leadership for the store portfolio',
+                    'Drive operational efficiency and customer satisfaction',
+                    'Develop and implement long-term store strategies',
+                    'Mentor and develop senior store leadership',
+                    'Ensure compliance with corporate policies and standards'
+                ]
+            }];
+
+            // -------- DOM REFS --------
+            const pages = {
+                landing: document.getElementById('page-landing'),
+                details: document.getElementById('page-details'),
+                jobs: document.getElementById('page-jobs'),
+            };
+            const navBtns = document.querySelectorAll('.nav-links button[data-page]');
+            const mobileToggle = document.getElementById('mobileToggle');
+            const navLinks = document.getElementById('navLinks');
+            const jobsGrid = document.getElementById('jobsGrid');
+            const filterBtns = document.querySelectorAll('.jobs-filters button');
+            const detailsForm = document.getElementById('detailsForm');
+            const fileInput = document.getElementById('cvFile');
+            const fileLabel = document.getElementById('fileLabel');
+            const stkModal = document.getElementById('stkModal');
+            const modalClose = document.getElementById('modalClose');
+            const stkCancel = document.getElementById('stkCancel');
+            const stkInitiate = document.getElementById('stkInitiate');
+            const stkPhone = document.getElementById('stkPhone');
+            const stkFee = document.getElementById('stkFee');
+            const modalJobName = document.getElementById('modalJobName');
+            const stkSim = document.getElementById('stkSim');
+            const simAmount = document.getElementById('simAmount');
+            const simAccount = document.getElementById('simAccount');
+            const stkConfirmPin = document.getElementById('stkConfirmPin');
+            const stkStatus = document.getElementById('stkStatus');
+            const stkRetry = document.getElementById('stkRetry');
+            const pinInputs = document.querySelectorAll('.pin-input');
+            const toast = document.getElementById('toast');
+            const toastMessage = document.getElementById('toastMessage');
+
+            let currentJob = null;
+            let currentFilter = 'all';
+            let isApplying = false;
+
+            // -------- NAVIGATION --------
+            function navigateTo(pageId) {
+                // Hide all pages
+                Object.keys(pages).forEach(key => {
+                    pages[key].classList.remove('active');
+                });
+                // Show target
+                const target = pages[pageId];
+                if (target) target.classList.add('active');
+
+                // Update nav buttons
+                navBtns.forEach(btn => {
+                    btn.classList.toggle('active', btn.dataset.page === pageId);
+                });
+
+                // Close mobile menu
+                navLinks.classList.remove('open');
+
+                // Scroll to top
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+
+            navBtns.forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const page = btn.dataset.page;
+                    if (page === 'jobs' && !isDetailsValid()) {
+                        showToast('Please fill in your details first.', 'error');
+                        navigateTo('details');
+                        return;
+                    }
+                    navigateTo(page);
+                });
+            });
+
+            // Any link with data-page
+            document.querySelectorAll('[data-page]').forEach(el => {
+                el.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const page = el.dataset.page;
+                    if (page === 'jobs' && !isDetailsValid()) {
+                        showToast('Please fill in your details first.', 'error');
+                        navigateTo('details');
+                        return;
+                    }
+                    navigateTo(page);
+                });
+            });
+
+            mobileToggle.addEventListener('click', () => {
+                navLinks.classList.toggle('open');
+            });
+
+            // -------- DETAILS FORM VALIDATION --------
+            function isDetailsValid() {
+                const name = document.getElementById('fullName').value.trim();
+                const email = document.getElementById('email').value.trim();
+                const phone = document.getElementById('phone').value.trim();
+                const edu = document.getElementById('education').value;
+                const loc = document.getElementById('location').value.trim();
+                const file = fileInput.files.length > 0;
+                return name && email && phone && edu && loc && file;
+            }
+
+            detailsForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                if (isDetailsValid()) {
+                    showToast('Details saved! Proceeding to job listings.', 'success');
+                    navigateTo('jobs');
+                } else {
+                    showToast('Please complete all required fields.', 'error');
+                }
+            });
+
+            fileInput.addEventListener('change', () => {
+                if (fileInput.files.length > 0) {
+                    fileLabel.textContent = fileInput.files[0].name;
+                    fileLabel.style.color = 'var(--primary)';
+                } else {
+                    fileLabel.textContent = 'Click or drag to upload (PDF, DOC, DOCX)';
+                    fileLabel.style.color = '';
+                }
+            });
+
+            // -------- JOBS RENDER --------
+            function renderJobs(filter = 'all') {
+                const filtered = JOBS.filter(job => {
+                    if (filter === 'available') return job.available;
+                    if (filter === 'unavailable') return !job.available;
+                    return true;
+                });
+
+                if (filtered.length === 0) {
+                    jobsGrid.innerHTML = `
+                        <div style="grid-column:1/-1;text-align:center;padding:3rem;color:var(--gray-500);">
+                            <i class="fas fa-search" style="font-size:2rem;display:block;margin-bottom:0.5rem;"></i>
+                            No positions match this filter.
+                        </div>
+                    `;
+                    return;
+                }
+
+                jobsGrid.innerHTML = filtered.map(job => {
+                    const isAvailable = job.available;
+                    const badgeClass = isAvailable ? 'available' : 'unavailable';
+                    const badgeText = isAvailable ? 'Available' : 'Unavailable';
+
+                    const tasksHtml = job.tasks.map(t => `<li>${t}</li>`).join('');
+
+                    const salaryHtml = isAvailable ?
+                        `<span class="job-salary">${job.salary} <span style="font-weight:400;color:var(--gray-500);font-size:0.7rem;">/ month</span></span>` :
+                        `<span class="job-salary"><span class="unavailable-text"><i class="fas fa-clock"></i> Currently unavailable</span></span>`;
+
+                    const feeHtml = isAvailable ?
+                        `<span class="job-fee"><i class="fas fa-coins"></i> Fee: KES ${job.fee.toLocaleString()}</span>` :
+                        '';
+
+                    const applyBtn = isAvailable ?
+                        `<button class="btn-apply" data-job-id="${job.id}"><i class="fas fa-hand-pointer"></i> Apply Now</button>` :
+                        `<button class="btn-apply" disabled style="background:var(--gray-300);"><i class="fas fa-lock"></i> Unavailable</button>`;
+
+                    return `
+                        <div class="job-card">
+                            <div class="job-header">
+                                <span class="job-title">${job.title}</span>
+                                <span class="job-badge ${badgeClass}">${badgeText}</span>
+                            </div>
+                            <ul class="job-tasks">${tasksHtml}</ul>
+                            <div class="job-footer">
+                                <div>
+                                    ${salaryHtml}
+                                    ${feeHtml}
+                                </div>
+                                ${applyBtn}
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+
+                // Attach apply events
+                document.querySelectorAll('.btn-apply[data-job-id]').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        const id = parseInt(btn.dataset.jobId);
+                        const job = JOBS.find(j => j.id === id);
+                        if (job && job.available) {
+                            if (!isDetailsValid()) {
+                                showToast('Please fill in your details first.', 'error');
+                                navigateTo('details');
+                                return;
+                            }
+                            openStkModal(job);
+                        }
+                    });
+                });
+            }
+
+            // -------- FILTERS --------
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    filterBtns.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    currentFilter = btn.dataset.filter;
+                    renderJobs(currentFilter);
+                });
+            });
+
+            // -------- STK MODAL --------
+            function openStkModal(job) {
+                currentJob = job;
+                modalJobName.textContent = `${job.title} – Application Fee: KES ${job.fee.toLocaleString()}`;
+                stkFee.value = `KES ${job.fee.toLocaleString()}`;
+                simAmount.textContent = `KES ${job.fee.toLocaleString()}`;
+                simAccount.textContent = `Quickmart-${job.title.replace(/\s/g,'')}`;
+                stkPhone.value = '';
+                stkSim.classList.remove('active');
+                document.getElementById('stkStep1').style.display = 'block';
+                stkStatus.className = 'stk-status';
+                stkStatus.textContent = '';
+                stkStatus.style.display = 'none';
+                stkRetry.style.display = 'none';
+                stkConfirmPin.disabled = false;
+                stkConfirmPin.innerHTML = '<i class="fas fa-check"></i> Confirm PIN';
+                pinInputs.forEach(inp => inp.value = '');
+                stkModal.classList.add('open');
+            }
+
+            function closeStkModal() {
+                stkModal.classList.remove('open');
+                currentJob = null;
+                isApplying = false;
+            }
+
+            modalClose.addEventListener('click', closeStkModal);
+            stkCancel.addEventListener('click', closeStkModal);
+
+            stkModal.addEventListener('click', (e) => {
+                if (e.target === stkModal) closeStkModal();
+            });
+
+            // -------- STK FLOW --------
+            stkInitiate.addEventListener('click', () => {
+                const phone = stkPhone.value.trim();
+                if (!phone || phone.length < 10) {
+                    showToast('Please enter a valid M-Pesa phone number.', 'error');
+                    return;
+                }
+                if (!currentJob) return;
+
+                // Show STK simulation
+                document.getElementById('stkStep1').style.display = 'none';
+                stkSim.classList.add('active');
+                stkStatus.className = 'stk-status';
+                stkStatus.textContent = '';
+                stkStatus.style.display = 'none';
+                stkRetry.style.display = 'none';
+                stkConfirmPin.disabled = false;
+                stkConfirmPin.innerHTML = '<i class="fas fa-check"></i> Confirm PIN';
+                pinInputs.forEach(inp => inp.value = '');
+
+                showToast('STK push sent to your phone!', 'success');
+            });
+
+            // PIN input auto-advance
+            pinInputs.forEach((inp, idx) => {
+                inp.addEventListener('input', () => {
+                    if (inp.value.length === 1 && idx < pinInputs.length - 1) {
+                        pinInputs[idx + 1].focus();
+                    }
+                });
+                inp.addEventListener('keydown', (e) => {
+                    if (e.key === 'Backspace' && idx > 0 && inp.value === '') {
+                        pinInputs[idx - 1].focus();
+                    }
+                });
+            });
+
+            stkConfirmPin.addEventListener('click', () => {
+                let pin = '';
+                pinInputs.forEach(inp => pin += inp.value);
+                if (pin.length !== 4) {
+                    showToast('Please enter your 4-digit M-Pesa PIN.', 'error');
+                    return;
+                }
+
+                stkConfirmPin.disabled = true;
+                stkConfirmPin.innerHTML = '<i class="fas fa-spinner fa-pulse"></i> Processing...';
+
+                // Simulate transaction
+                setTimeout(() => {
+                    // 85% success rate simulation
+                    const success = Math.random() < 0.85;
+                    stkStatus.style.display = 'block';
+                    if (success) {
+                        stkStatus.className = 'stk-status success';
+                        stkStatus.textContent = '✅ Payment successful! Your application has been submitted.';
+                        stkConfirmPin.style.display = 'none';
+                        stkRetry.style.display = 'none';
+                        showToast(`Application for ${currentJob.title} submitted successfully!`, 'success');
+                        // Reset after 3s
+                        setTimeout(() => {
+                            closeStkModal();
+                            renderJobs(currentFilter);
+                        }, 3000);
+                    } else {
+                        stkStatus.className = 'stk-status failed';
+                        stkStatus.textContent = '❌ Transaction failed. Please try again.';
+                        stkConfirmPin.disabled = false;
+                        stkConfirmPin.innerHTML = '<i class="fas fa-redo"></i> Retry PIN';
+                        stkRetry.style.display = 'inline-block';
+                        stkRetry.addEventListener('click', () => {
+                            stkStatus.style.display = 'none';
+                            stkStatus.className = 'stk-status';
+                            pinInputs.forEach(inp => inp.value = '');
+                            pinInputs[0].focus();
+                            stkConfirmPin.disabled = false;
+                            stkConfirmPin.innerHTML = '<i class="fas fa-check"></i> Confirm PIN';
+                            stkRetry.style.display = 'none';
+                        });
+                    }
+                }, 2000);
+            });
+
+            // -------- TOAST --------
+            function showToast(message, type = 'success') {
+                toastMessage.textContent = message;
+                toast.className = 'toast';
+                if (type === 'success') toast.classList.add('success');
+                if (type === 'error') toast.classList.add('error');
+                toast.classList.add('show');
+                clearTimeout(toast._timer);
+                toast._timer = setTimeout(() => {
+                    toast.classList.remove('show');
+                }, 4000);
+            }
+
+            // -------- NAVBAR SCROLL --------
+            window.addEventListener('scroll', () => {
+                document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 20);
+            });
+
+            // -------- INIT --------
+            renderJobs('all');
+            navigateTo('landing');
+
+            // Expose for debugging
+            window.quickmart = { JOBS, renderJobs, navigateTo };
+
+        })();
+    </script>
+
+</body>
+</html>

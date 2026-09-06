@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Quickmart Supermarket – Careers</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&display=swap" rel="stylesheet"/>
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"/>
+    <style>
+        /* ===== RESET & BASE ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #0f7c3f;
+            --primary-dark: #0a5e2f;
+            --primary-light: #e6f5ed;
+            --accent: #d42e2e;
+            --gold: #f5a623;
+            --gray-50: #f8fafc;
+            --gray-100: #f1f5f9;
+            --gray-200: #e2e8f0;
+            --gray-300: #cbd5e1;
+            --gray-500: #64748b;
+            --gray-600: #475569;
+            --gray-700: #334155;
+            --gray-800: #1e293b;
+            --gray-900: #0f172a;
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.06);
+            --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.08);
+            --shadow-lg: 0 10px 40px rgba(0, 0, 0, 0.12);
+            --shadow-xl: 0 20px 60px rgba(0, 0, 0, 0.15);
+            --radius: 12px;
+            --radius-lg: 20px;
+            --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--gray-50);
+            color: var(--gray-800);
+            line-height: 1.6;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        button {
+            cursor: pointer;
+            font-family: inherit;
+            border: none;
+            outline: none;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ===== NAVBAR ===== */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(226, 232, 240, 0.6);
+            padding: 0 2rem;
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: var(--transition);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 800;
+            font-size: 1.35rem;
+            color: var(--primary);
+        }
+
+        .nav-brand i {
+            font-size: 1.6rem;
+            color: var(--accent);
+        }
+
+        .nav-brand span {
+            color: var(--gray-900);
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-links a {
+            padding: 0.5rem 1.2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            color: var(--gray-600);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            background: var(--gray-100);
+            color: var(--gray-900);
+        }
+
+        .nav-links a.active {
+            background: var(--primary);
+            color: #fff;
+        }
+
+        .nav-cta {
+            background: var(--primary) !important;
+            color: #fff !important;
+            padding: 0.5rem 1.5rem !important;
+            border-radius: 50px !important;
+            font-weight: 700 !important;
+        }
+
+        .nav-cta:hover {
+            background: var(--primary-dark) !important;
+            transform: scale(1.02);
+        }
+
+        /* ===== HERO ===== */
+        .hero {
+            position: relative;
+            min-height: 92vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(135deg, #f8fafc 0%, #e6f5ed 100%);
+            overflow: hidden;
+            padding: 2rem;
+            padding-top: 90px;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -40%;
+            right: -20%;
+            width: 70%;
+            height: 120%;
+            background: radial-gradient(ellipse, rgba(15, 124, 63, 0.08) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -30%;
+            left: -10%;
+            width: 50%;
+            height: 80%;
+            background: radial-gradient(ellipse, rgba(212, 46, 46, 0.06) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 780px;
+            animation: slideUp 0.8s ease forwards;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--primary-light);
+            color: var(--primary-dark);
+            padding: 0.4rem 1.2rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 0.3px;
+            margin-bottom: 1.5rem;
+            border: 1px solid rgba(15, 124, 63, 0.15);
+        }
+
+        .hero-badge i {
+            font-size: 0.7rem;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.6rem, 6vw, 4.2rem);
+            font-weight: 900;
+            line-height: 1.1;
+            color: var(--gray-900);
+            margin-bottom: 1.2rem;
+        }
+
+        .hero h1 .highlight {
+            color: var(--primary);
+            position: relative;
+        }
+
+        .hero h1 .highlight::after {
+            content: '';
+            position: absolute;
+            bottom: 4px;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: var(--gold);
+            border-radius: 4px;
+            opacity: 0.3;
+        }
+
+        .hero p {
+            font-size: 1.15rem;
+            color: var(--gray-600);
+            max-width: 560px;
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+
+        .hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 0.9rem 2.2rem;
+            background: var(--primary);
+            color: #fff;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1rem;
+            transition: var(--transition);
+            box-shadow: 0 4px 16px rgba(15, 124, 63, 0.3);
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 28px rgba(15, 124, 63, 0.35);
+        }
+
+        .btn-secondary {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 0.9rem 2.2rem;
+            background: transparent;
+            color: var(--gray-700);
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1rem;
+            border: 2px solid var(--gray-300);
+            transition: var(--transition);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+            transform: translateY(-2px);
+            background: var(--primary-light);
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 3rem;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--gray-200);
+        }
+
+        .hero-stats .stat {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .hero-stats .stat .number {
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: var(--gray-900);
+        }
+
+        .hero-stats .stat .label {
+            font-size: 0.8rem;
+            color: var(--gray-500);
+            font-weight: 500;
+        }
+
+        .hero-visual {
+            position: relative;
+            z-index: 2;
+            flex: 1;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            margin-left: 2rem;
+        }
+
+        .hero-visual .decoration {
+            width: 380px;
+            height: 380px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            border-radius: 50%;
+            opacity: 0.1;
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .hero-visual .card-float {
+            background: #fff;
+            padding: 1.8rem 2.2rem;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-xl);
+            width: 320px;
+            position: relative;
+            z-index: 3;
+            border: 1px solid rgba(226, 232, 240, 0.4);
+        }
+
+        .hero-visual .card-float .row {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 0.6rem 0;
+            border-bottom: 1px solid var(--gray-100);
+        }
+
+        .hero-visual .card-float .row:last-child {
+            border-bottom: none;
+        }
+
+        .hero-visual .card-float .icon-circle {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--primary-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-size: 1rem;
+            flex-shrink: 0;
+        }
+
+        .hero-visual .card-float .info h4 {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--gray-900);
+        }
+
+        .hero-visual .card-float .info p {
+            font-size: 0.75rem;
+            color: var(--gray-500);
+            margin: 0;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 1024px) {
+            .hero-visual .card-float { width: 260px; }
+            .hero-visual .decoration { width: 280px; height: 280px; }
+        }
+
+        @media (max-width: 900px) {
+            .hero {
+                flex-direction: column;
+                text-align: center;
+                padding: 3rem 1.5rem;
+                min-height: auto;
+                padding-top: 100px;
+            }
+            .hero-content { max-width: 100%; }
+            .hero p { max-width: 100%; margin-left: auto; margin-right: auto; }
+            .hero-actions { justify-content: center; }
+            .hero-stats { justify-content: center; gap: 2rem; flex-wrap: wrap; }
+            .hero-visual { margin-left: 0; margin-top: 2rem; justify-content: center; width: 100%; }
+            .hero-visual .card-float { width: 100%; max-width: 360px; }
+            .hero-visual .decoration { display: none; }
+            .navbar { padding: 0 1rem; }
+            .nav-links a { padding: 0.4rem 0.8rem; font-size: 0.8rem; }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 { font-size: 2rem; }
+            .hero p { font-size: 1rem; }
+            .hero-stats .stat .number { font-size: 1.2rem; }
+            .nav-links { gap: 0.2rem; }
+            .nav-links a { padding: 0.3rem 0.6rem; font-size: 0.75rem; }
+            .nav-cta { padding: 0.3rem 1rem !important; }
+        }
+    </style>
+</head>
+<body>
+    <!-- ===== NAVBAR ===== -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-brand">
+            <i class="fas fa-store"></i>
+            Quick<span>mart</span>
+        </div>
+        <div class="nav-links">
+            <a href="landing.html" class="active"><i class="fas fa-home"></i> Home</a>
+            <a href="details.html"><i class="fas fa-user-edit"></i> Details</a>
+            <a href="jobs.html"><i class="fas fa-briefcase"></i> Jobs</a>
+            <a href="details.html" class="nav-cta"><i class="fas fa-paper-plane"></i> Apply Now</a>
+        </div>
+    </nav>
+
+    <!-- ===== HERO ===== -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-badge">
+                <i class="fas fa-bolt"></i> We're Hiring – Join the Quickmart Family
+            </div>
+            <h1>
+                Build Your Career at
+                <span class="highlight">Quickmart</span>
+                Supermarket
+            </h1>
+            <p>
+                Kenya's trusted supermarket chain is looking for passionate,
+                dedicated individuals to join our growing team. Explore
+                exciting opportunities across all departments.
+            </p>
+            <div class="hero-actions">
+                <a href="jobs.html" class="btn-primary">
+                    <i class="fas fa-search"></i> View Open Positions
+                </a>
+                <a href="details.html" class="btn-secondary">
+                    <i class="fas fa-arrow-right"></i> Start Application
+                </a>
+            </div>
+            <div class="hero-stats">
+                <div class="stat">
+                    <span class="number">18+</span>
+                    <span class="label">Departments</span>
+                </div>
+                <div class="stat">
+                    <span class="number">50+</span>
+                    <span class="label">Open Roles</span>
+                </div>
+                <div class="stat">
+                    <span class="number">2.4K</span>
+                    <span class="label">Team Members</span>
+                </div>
+            </div>
+        </div>
+        <div class="hero-visual">
+            <div class="decoration"></div>
+            <div class="card-float">
+                <div class="row">
+                    <div class="icon-circle"><i class="fas fa-users"></i></div>
+                    <div class="info">
+                        <h4>Great Culture</h4>
+                        <p>Inclusive &amp; supportive environment</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="icon-circle"><i class="fas fa-trophy"></i></div>
+                    <div class="info">
+                        <h4>Career Growth</h4>
+                        <p>Training &amp; development programs</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="icon-circle"><i class="fas fa-hand-holding-heart"></i></div>
+                    <div class="info">
+                        <h4>Staff Benefits</h4>
+                        <p>Competitive packages &amp; perks</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

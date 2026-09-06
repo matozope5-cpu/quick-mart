@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Quickmart – Personal Details</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&display=swap" rel="stylesheet"/>
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"/>
+    <style>
+        /* ===== RESET & BASE ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #0f7c3f;
+            --primary-dark: #0a5e2f;
+            --primary-light: #e6f5ed;
+            --accent: #d42e2e;
+            --gray-50: #f8fafc;
+            --gray-100: #f1f5f9;
+            --gray-200: #e2e8f0;
+            --gray-300: #cbd5e1;
+            --gray-500: #64748b;
+            --gray-600: #475569;
+            --gray-700: #334155;
+            --gray-800: #1e293b;
+            --gray-900: #0f172a;
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.06);
+            --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.08);
+            --shadow-lg: 0 10px 40px rgba(0, 0, 0, 0.12);
+            --radius: 12px;
+            --radius-lg: 20px;
+            --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--gray-50);
+            color: var(--gray-800);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        button {
+            cursor: pointer;
+            font-family: inherit;
+            border: none;
+            outline: none;
+        }
+        input,
+        select,
+        textarea {
+            font-family: inherit;
+            outline: none;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ===== NAVBAR ===== */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(226, 232, 240, 0.6);
+            padding: 0 2rem;
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: var(--transition);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 800;
+            font-size: 1.35rem;
+            color: var(--primary);
+        }
+
+        .nav-brand i {
+            font-size: 1.6rem;
+            color: var(--accent);
+        }
+        .nav-brand span { color: var(--gray-900); }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-links a {
+            padding: 0.5rem 1.2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            color: var(--gray-600);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            background: var(--gray-100);
+            color: var(--gray-900);
+        }
+
+        .nav-links a.active {
+            background: var(--primary);
+            color: #fff;
+        }
+
+        .nav-cta {
+            background: var(--primary) !important;
+            color: #fff !important;
+            padding: 0.5rem 1.5rem !important;
+            border-radius: 50px !important;
+            font-weight: 700 !important;
+        }
+
+        .nav-cta:hover {
+            background: var(--primary-dark) !important;
+            transform: scale(1.02);
+        }
+
+        /* ===== DETAILS PAGE ===== */
+        #page-details {
+            padding: 100px 2rem 4rem;
+            max-width: 820px;
+            margin: 0 auto;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .details-header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .details-header h2 {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--gray-900);
+        }
+
+        .details-header p {
+            color: var(--gray-500);
+            margin-top: 0.3rem;
+        }
+
+        .details-form {
+            background: #fff;
+            padding: 2.5rem 3rem;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--gray-200);
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.2rem 1.8rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .form-group.full {
+            grid-column: 1 / -1;
+        }
+
+        .form-group label {
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--gray-700);
+            letter-spacing: 0.3px;
+        }
+
+        .form-group label .required {
+            color: var(--accent);
+            margin-left: 2px;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            padding: 0.7rem 1rem;
+            border: 1.5px solid var(--gray-200);
+            border-radius: var(--radius);
+            font-size: 0.95rem;
+            transition: var(--transition);
+            background: var(--gray-50);
+            width: 100%;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(15, 124, 63, 0.1);
+            background: #fff;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 90px;
+        }
+
+        .form-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--gray-200);
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 0.8rem 2.8rem;
+            background: var(--primary);
+            color: #fff;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1rem;
+            transition: var(--transition);
+            box-shadow: 0 4px 16px rgba(15, 124, 63, 0.3);
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 28px rgba(15, 124, 63, 0.35);
+        }
+
+        .btn-secondary {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 0.8rem 2rem;
+            background: transparent;
+            color: var(--gray-700);
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            border: 2px solid var(--gray-300);
+            transition: var(--transition);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+            transform: translateY(-2px);
+            background: var(--primary-light);
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            z-index: 10000;
+            background: var(--gray-900);
+            color: #fff;
+            padding: 0.8rem 1.6rem;
+            border-radius: var(--radius);
+            font-weight: 600;
+            font-size: 0.9rem;
+            box-shadow: var(--shadow-lg);
+            transform: translateY(120px);
+            opacity: 0;
+            transition: all 0.4s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .toast.success { background: #166534; }
+        .toast.error { background: #991b1b; }
+
+        @media (max-width: 900px) {
+            .details-form { padding: 1.8rem; }
+            .form-grid { grid-template-columns: 1fr; }
+            .navbar { padding: 0 1rem; }
+            .form-actions { flex-direction: column-reverse; }
+            .form-actions .btn-primary,
+            .form-actions .btn-secondary { width: 100%; justify-content: center; }
+            #page-details { padding: 90px 1rem 3rem; }
+            .nav-links a { padding: 0.4rem 0.8rem; font-size: 0.8rem; }
+        }
+
+        @media (max-width: 480px) {
+            .details-header h2 { font-size: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <!-- ===== NAVBAR ===== -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-brand">
+            <i class="fas fa-store"></i>
+            Quick<span>mart</span>
+        </div>
+        <div class="nav-links">
+            <a href="landing.html"><i class="fas fa-home"></i> Home</a>
+            <a href="details.html" class="active"><i class="fas fa-user-edit"></i> Details</a>
+            <a href="jobs.html"><i class="fas fa-briefcase"></i> Jobs</a>
+            <a href="details.html" class="nav-cta"><i class="fas fa-paper-plane"></i> Apply Now</a>
+        </div>
+    </nav>
+
+    <!-- ===== DETAILS FORM ===== -->
+    <section id="page-details">
+        <div class="details-header">
+            <h2><i class="fas fa-user-edit" style="color:var(--primary);margin-right:10px;"></i>Personal Details</h2>
+            <p>Fill in your information so we can process your application.</p>
+        </div>
+        <form class="details-form" id="detailsForm" novalidate>
+            <div class="form-grid">
+                <div class="form-group">
+                    <label>Full Name <span class="required">*</span></label>
+                    <input type="text" id="fullName" placeholder="e.g. Jane Muthoni" required />
+                </div>
+                <div class="form-group">
+                    <label>Email Address <span class="required">*</span></label>
+                    <input type="email" id="email" placeholder="jane@example.com" required />
+                </div>
+                <div class="form-group">
+                    <label>Phone Number <span class="required">*</span></label>
+                    <input type="tel" id="phone" placeholder="0712 345 678" required />
+                </div>
+                <div class="form-group">
+                    <label>Date of Birth</label>
+                    <input type="date" id="dob" />
+                </div>
+                <div class="form-group">
+                    <label>Gender</label>
+                    <select id="gender">
+                        <option value="">Select...</option>
+                        <option value="Female">Female</option>
+                        <option value="Male">Male</option>
+                        <option value="Non-binary">Non-binary</option>
+                        <option value="Prefer not to say">Prefer not to say</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Highest Education <span class="required">*</span></label>
+                    <select id="education" required>
+                        <option value="">Select...</option>
+                        <option value="KCSE">KCSE</option>
+                        <option value="Certificate">Certificate</option>
+                        <option value="Diploma">Diploma</option>
+                        <option value="Bachelor's Degree">Bachelor's Degree</option>
+                        <option value="Master's Degree">Master's Degree</option>
+                        <option value="PhD">PhD</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Years of Experience</label>
+                    <select id="experience">
+                        <option value="0">0 – Fresh Graduate</option>
+                        <option value="1">1 year</option>
+                        <option value="2">2 years</option>
+                        <option value="3">3 years</option>
+                        <option value="4">4 years</option>
+                        <option value="5">5+ years</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Current Location <span class="required">*</span></label>
+                    <input type="text" id="location" placeholder="e.g. Nairobi" required />
+                </div>
+                <div class="form-group full">
+                    <label>Cover Note (optional)</label>
+                    <textarea id="coverNote" placeholder="Tell us why you'd be a great fit for Quickmart..."></textarea>
+                </div>
+            </div>
+            <div class="form-actions">
+                <a href="landing.html" class="btn-secondary">
+                    <i class="fas fa-arrow-left"></i> Back
+                </a>
+                <button type="submit" class="btn-primary" id="detailsSubmit">
+                    <i class="fas fa-arrow-right"></i> Continue to Jobs
+                </button>
+            </div>
+        </form>
+    </section>
+
+    <!-- ===== TOAST ===== -->
+    <div class="toast" id="toast">
+        <i class="fas fa-check-circle"></i>
+        <span id="toastMessage">Success!</span>
+    </div>
+
+    <script>
+        (function() {
+            const form = document.getElementById('detailsForm');
+            const toast = document.getElementById('toast');
+            const toastMessage = document.getElementById('toastMessage');
+
+            function showToast(message, type = 'success') {
+                toastMessage.textContent = message;
+                toast.className = 'toast';
+                if (type === 'success') toast.classList.add('success');
+                if (type === 'error') toast.classList.add('error');
+                toast.classList.add('show');
+                clearTimeout(toast._timer);
+                toast._timer = setTimeout(() => {
+                    toast.classList.remove('show');
+                }, 4000);
+            }
+
+            function isDetailsValid() {
+                const name = document.getElementById('fullName').value.trim();
+                const email = document.getElementById('email').value.trim();
+                const phone = document.getElementById('phone').value.trim();
+                const edu = document.getElementById('education').value;
+                const loc = document.getElementById('location').value.trim();
+                return name && email && phone && edu && loc;
+            }
+
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                if (isDetailsValid()) {
+                    // Save to localStorage so jobs page knows details are filled
+                    localStorage.setItem('detailsFilled', 'true');
+                    showToast('Details saved! Redirecting to job listings.', 'success');
+                    setTimeout(() => {
+                        window.location.href = 'jobs.html';
+                    }, 800);
+                } else {
+                    showToast('Please complete all required fields.', 'error');
+                }
+            });
+        })();
+    </script>
+</body>
+</html>
