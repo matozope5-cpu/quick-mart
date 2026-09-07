@@ -19,7 +19,58 @@
             align-items: center;
             justify-content: center;
             padding: 1.5rem;
+            overflow-x: hidden;
         }
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* ===== LOADING OVERLAY ===== */
+        #loadingOverlay {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            background: rgba(255,255,255,0.95);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 1.5rem;
+            transition: opacity 0.5s ease;
+            text-align: center;
+            padding: 2rem;
+        }
+        #loadingOverlay.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+        .spinner {
+            width: 4rem;
+            height: 4rem;
+            border: 5px solid var(--gray-200, #e2e8f0);
+            border-top-color: #0f7c3f;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+        #loadingText {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #334155;
+            min-height: 2.5rem;
+            transition: opacity 0.3s ease;
+        }
+        #loadingSubtext {
+            font-size: 0.9rem;
+            color: #64748b;
+            min-height: 1.5rem;
+        }
+
+        /* ===== CARD ===== */
         .card {
             background: #fff;
             max-width: 540px;
@@ -29,10 +80,6 @@
             box-shadow: 0 20px 60px rgba(0,0,0,0.12);
             text-align: center;
             animation: fadeUp 0.6s ease;
-        }
-        @keyframes fadeUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
         }
         .icon {
             font-size: 4rem;
@@ -207,19 +254,28 @@
         .toast.success { background: #166534; }
         .toast.error { background: #991b1b; }
 
-        /* Success card (hidden initially) */
+        /* Cards */
+        #paymentCard { display: none; }
         #successCard { display: none; }
-        #paymentCard { display: block; }
 
         @media (max-width: 480px) {
             .card { padding: 2rem 1.5rem; }
             .info-grid { grid-template-columns: 1fr; }
+            #loadingText { font-size: 1rem; }
+            #loadingSubtext { font-size: 0.8rem; }
         }
     </style>
 </head>
 <body>
+    <!-- ===== LOADING OVERLAY ===== -->
+    <div id="loadingOverlay">
+        <div class="spinner"></div>
+        <div id="loadingText">Analysing your qualifications...</div>
+        <div id="loadingSubtext">Please wait while we review your profile</div>
+    </div>
+
+    <!-- ===== PAYMENT CARD ===== -->
     <div class="card" id="paymentCard">
-        <!-- Qualification Message -->
         <div class="icon"><i class="fas fa-user-check"></i></div>
         <h1>You're Qualified!</h1>
         <p class="sub" id="qualificationText">
@@ -250,7 +306,7 @@
         </div>
     </div>
 
-    <!-- Success Card (hidden initially) -->
+    <!-- ===== SUCCESS CARD ===== -->
     <div class="card" id="successCard">
         <div class="icon"><i class="fas fa-check-circle"></i></div>
         <h1>Application Submitted!</h1>
@@ -287,7 +343,39 @@
     <script>
         (function() {
             // ================================================================
-            // PHONE NORMALIZATION (for frontend validation only)
+            // LOADING SEQUENCE (5 seconds with changing text)
+            // ================================================================
+            const overlay = document.getElementById('loadingOverlay');
+            const loadingText = document.getElementById('loadingText');
+            const loadingSubtext = document.getElementById('loadingSubtext');
+
+            const steps = [
+                { text: 'Analysing your qualifications...', sub: 'Reviewing your education and experience' },
+                { text: 'Matching your profile with requirements...', sub: 'Finding the best fit for your skills' },
+                { text: 'Verifying your eligibility...', sub: 'Checking against our criteria' },
+                { text: 'Preparing your application...', sub: 'Almost there!' }
+            ];
+
+            let stepIndex = 0;
+            const totalDuration = 5000; // 5 seconds
+            const stepDuration = totalDuration / steps.length; // ~1.25s per step
+
+            function nextStep() {
+                if (stepIndex < steps.length) {
+                    loadingText.textContent = steps[stepIndex].text;
+                    loadingSubtext.textContent = steps[stepIndex].sub;
+                    stepIndex++;
+                    setTimeout(nextStep, stepDuration);
+                } else {
+                    // Hide overlay, show payment card
+                    overlay.classList.add('hidden');
+                    setTimeout(() => overlay.remove(), 500);
+                    document.getElementById('paymentCard').style.display = 'block';
+                }
+            }
+
+            // ================================================================
+            // PHONE NORMALIZATION
             // ================================================================
             function normalizePhoneForBackend(raw) {
                 if (!raw) return null;
@@ -340,9 +428,12 @@
                 return;
             }
 
-            // Display job info
+            // Display job info (will be shown after loader)
             document.getElementById('jobTitleDisplay').textContent = currentJob.title;
             document.getElementById('feeDisplay').textContent = `KES ${currentJob.fee.toLocaleString()}`;
+
+            // Start the loader sequence
+            nextStep();
 
             // ================================================================
             // BACKEND API CALLS
@@ -350,17 +441,15 @@
             let paymentTimer = null;
 
             async function initiatePayment(phoneNumber, amount) {
-                // Use the backend API endpoint
                 const response = await fetch('/api/initiate-payment', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
-                        phone_number: phoneNumber,   // send raw (e.g., 0712345678)
+                        phone_number: phoneNumber,
                         amount: amount,
-                        loan_amount: currentJob.amount || amount  // optional
+                        loan_amount: currentJob.amount || amount
                     })
                 });
-
                 const result = await response.json();
                 if (!response.ok) {
                     throw new Error(result.error || 'Payment initiation failed');
@@ -368,7 +457,7 @@
                 if (!result.reference) {
                     throw new Error('No transaction reference received');
                 }
-                return result; // { success: true, reference: '...', ... }
+                return result;
             }
 
             async function checkPaymentStatus(reference, maxAttempts = 20) {
@@ -379,13 +468,10 @@
                         try {
                             const response = await fetch(`/api/verify-payment?reference=${encodeURIComponent(reference)}`);
                             const result = await response.json();
-
                             if (!response.ok) {
                                 throw new Error(result.error || 'Verification failed');
                             }
-
-                            const status = result.status; // 'COMPLETED', 'PENDING', 'FAILED', 'CANCELLED', etc.
-
+                            const status = result.status;
                             if (status === 'COMPLETED') {
                                 clearInterval(paymentTimer);
                                 resolve(true);
@@ -396,7 +482,6 @@
                                 clearInterval(paymentTimer);
                                 reject(new Error('Verification timeout'));
                             }
-                            // Otherwise, continue polling
                         } catch (error) {
                             console.error('Status check error:', error);
                             if (attempts >= maxAttempts) {
@@ -509,28 +594,21 @@
                     showToast('Please enter a valid M-Pesa phone number.', 'error');
                     return;
                 }
-                // Validate format (frontend)
                 const normalized = normalizePhoneForBackend(phone);
                 if (!normalized) {
                     showToast('Please enter a valid Kenyan phone number (e.g. 0712345678).', 'error');
                     return;
                 }
 
-                // Disable button
                 payBtn.disabled = true;
                 payBtn.innerHTML = '<i class="fas fa-spinner fa-pulse"></i> Processing...';
 
                 try {
-                    // 1. Initiate payment via backend
                     const initResponse = await initiatePayment(phone, currentJob.fee);
                     const reference = initResponse.reference;
-
                     showToast('STK push sent! Check your phone.', 'success');
-
-                    // 2. Poll for status
                     const success = await checkPaymentStatus(reference, 20);
                     if (success) {
-                        // Payment successful – show success card
                         document.getElementById('paymentCard').style.display = 'none';
                         document.getElementById('successCard').style.display = 'block';
                         showToast('Payment successful! Application submitted.', 'success');
@@ -541,8 +619,6 @@
                 } catch (error) {
                     console.error('Payment error:', error);
                     showToast('Payment failed: ' + error.message, 'error');
-
-                    // Offer manual fallback
                     const manualVerified = await showManualPaymentModal(currentJob.fee);
                     if (manualVerified) {
                         document.getElementById('paymentCard').style.display = 'none';
